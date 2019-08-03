@@ -1,0 +1,22 @@
+#!/bin/bash
+source config
+
+if [[ -z $1 ]]; then
+    echo "You must specify a coin"
+    exit 0
+fi
+
+coin=$(echo $1 | tr [a-z] [A-Z]) #uppercase
+
+filename="./jl777coins/electrums/${coin}"
+if test -f ${filename}; then
+    echo "${coin} exists! Connecting..."
+
+    electrumstring=$(jq -r -j '[{url:.[].url}]' $filename | awk 1 ORS=' ' | sed 's/ //g' ) # | sed 's/"/\\"/g'
+
+else
+    echo "Coin electrum file doesn't exist"
+    exit 0
+fi
+
+jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"userpass":"'${userpass}'","method":"electrum","coin":"'${coin}'","servers":'${electrumstring}'}')

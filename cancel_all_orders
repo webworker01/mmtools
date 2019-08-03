@@ -1,0 +1,18 @@
+#!/bin/bash
+source config
+
+if [[ -z $1 ]] && [[ -z $2 ]]; then
+    cancelby=$(jq -r '{"type": "All"}' <<< {} | awk 1 ORS=' ' | sed 's/ //g')
+
+elif [[ -z $1 ]] || [[ -z $2 ]]; then
+    echo "You must specify both coins in the pair"
+    exit 0
+
+else
+    coin1=$(echo $1 | tr [a-z] [A-Z]) #uppercase
+    coin2=$(echo $2 | tr [a-z] [A-Z]) #uppercase
+
+    cancelby=$(jq -r --arg base ${coin1} --arg rel ${coin2} '{"type": "Pair", "data": {"base": $base, "rel": $rel}}' <<< {} | awk 1 ORS=' ' | sed 's/ //g')
+fi
+
+jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"cancel_all_orders","cancel_by":'${cancelby}',"userpass":"'${userpass}'"}')

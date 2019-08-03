@@ -1,0 +1,14 @@
+# docs
+# https://developers.atomicdex.io/basic-docs/atomicdex/atomicdex-api.html
+
+#Path to mm2 executables
+mmpath=${HOME}/atomicDEX-API/target/debug/
+
+#Net ID to join
+netid=9999
+
+#Wallet Passphrase
+passphrase=
+
+#RPC password
+userpass=

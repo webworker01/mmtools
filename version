@@ -1,0 +1,4 @@
+#!/bin/bash
+source config
+
+jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"version","userpass":"'${userpass}'"}')

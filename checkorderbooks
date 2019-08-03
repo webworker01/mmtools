@@ -1,0 +1,18 @@
+#!/bin/bash
+source config
+
+if [[ -z $1 ]] || [[ -z $2 ]]; then
+    echo "Usage: ./checkorderbooks <base> <reL>"
+    exit 0
+fi
+
+coin1=$(echo $1 | tr [a-z] [A-Z]) #uppercase
+coin2=$(echo $2 | tr [a-z] [A-Z]) #uppercase
+
+orderbooks=$(curl -s --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"orderbook\",\"base\":\"${coin1}\",\"rel\":\"${coin2}\"}")
+
+bids=$(jq -j .bids <<< $orderbooks)
+asks=$(jq -j .asks <<< $orderbooks)
+
+echo "Bids $bids"
+echo "Asks $asks"

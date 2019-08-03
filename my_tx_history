@@ -1,0 +1,17 @@
+#!/bin/bash
+source config
+
+if [[ -z $1 ]]; then
+    echo "You must specify a coin"
+    exit 0
+fi
+
+if [[ -z $2 ]]; then
+    limit=10
+else
+    limit=$2
+fi
+
+coin=$(echo $1 | tr [a-z] [A-Z]) #uppercase
+
+jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"my_tx_history","coin":"'${coin}'","limit":"'${limit}'","userpass":"'${userpass}'"}')
