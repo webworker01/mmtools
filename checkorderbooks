@@ -11,8 +11,10 @@ coin2=$(echo $2 | tr [a-z] [A-Z]) #uppercase
 
 orderbooks=$(curl -s --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"orderbook\",\"base\":\"${coin1}\",\"rel\":\"${coin2}\"}")
 
-bids=$(jq -j .bids <<< $orderbooks)
-asks=$(jq -j .asks <<< $orderbooks)
+bids=$(jq -c .bids <<< $orderbooks)
+asks=$(jq -c .asks <<< $orderbooks)
 
-echo "Bids $bids"
-echo "Asks $asks"
+echo "Bids:"
+echo $bids
+echo "Asks:"
+echo $asks

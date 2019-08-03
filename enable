@@ -12,8 +12,7 @@ filename="./jl777coins/electrums/${coin}"
 if test -f ${filename}; then
     echo "${coin} exists! Connecting..."
 
-    electrumstring=$(jq -r -j '[{url:.[].url}]' $filename | awk 1 ORS=' ' | sed 's/ //g' ) # | sed 's/"/\\"/g'
-
+    electrumstring=$(jq -c '[{url:.[].url}]' $filename)
 else
     echo "Coin electrum file doesn't exist"
     exit 0
