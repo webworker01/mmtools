@@ -11,10 +11,13 @@ coin2=$(echo $2 | tr [a-z] [A-Z]) #uppercase
 
 orderbooks=$(curl -s --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"orderbook\",\"base\":\"${coin1}\",\"rel\":\"${coin2}\"}")
 
-bids=$(jq -c .bids <<< $orderbooks)
-asks=$(jq -c .asks <<< $orderbooks)
+echo "--Bids--"
+printf "%5s %35s %10s %9s %9s\n" "Coin" "Address" "Price" "Max Volume" "Ask Price"
+bids=$(jq -r '(.bids[] | [.coin, .address, .price, .maxvolume, .askprice]) | @tsv' <<< $orderbooks)
+echo "$bids" | awk '{printf("%5s %35s %.8f %.8f %.8f\n", $1, $2, $3, $4, $5)}'
 
-echo "Bids:"
-echo $bids
-echo "Asks:"
-echo $asks
+echo
+echo "--Asks--"
+printf "%5s %35s %10s %10s %9s\n" "Coin" "Address" "Price" "Max Volume"
+bids=$(jq -r '(.asks[] | [.coin, .address, .price, .maxvolume]) | @tsv' <<< $orderbooks)
+echo "$bids" | awk '{printf("%5s %35s %.8f %.8f\n", $1, $2, $3, $4)}'
