@@ -15,11 +15,11 @@ echo "--Bids--"
 printf "%-7s %-34s %20s %20s %20s\n" "Coin" "Address" "Price" "Max Volume" "Ask Price"
 printf "%-7s %-34s %20s %20s %20s\n" "----" "-------" "-----" "----------" "---------"
 bids=$(jq -r '(.bids[] | [.coin, .address, .price, .maxvolume, .askprice]) | @tsv' <<< $orderbooks)
-echo "$bids" | awk '{printf("%-6s %35s %20.8f %20.8f %20.8f\n", $1, $2, $3, $4, $5)}'
+awk '{printf("%-6s %35s %20.8f %20.8f %20.8f\n", $1, $2, $3, $4, $5)}' <<< $bids
 
 echo
 echo "--Asks--"
 printf "%-7s %-34s %20s %20s\n" "Coin" "Address" "Price" "Max Volume"
 printf "%-7s %-34s %20s %20s\n" "----" "-------" "-----" "----------"
-bids=$(jq -r '(.asks[] | [.coin, .address, .price, .maxvolume]) | @tsv' <<< $orderbooks)
-echo "$bids" | awk '{printf("%-6s %35s %20.8f %20.8f\n", $1, $2, $3, $4)}'
+asks=$(jq -r '(.asks[] | [.coin, .address, .price, .maxvolume]) | @tsv' <<< $orderbooks)
+awk '{printf("%-6s %35s %20.8f %20.8f\n", $1, $2, $3, $4)}' <<< $asks
