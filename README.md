@@ -1,20 +1,23 @@
 # mmtools
 Bash CLI tools for MM2
 
-Follow these instructions for initial setup:
-https://developers.atomicdex.io/basic-docs/atomicdex/atomicdex-setup/get-started-atomicdex.html
-
-Clone this repo
+## Setup
 
 ```
 cd ~
 git clone https://github.com/webworker01/mmtools.git
 cd ~/mmtools
 git submodule update --init --recursive
+
+#edit the config file with your wallet passphrase and rpc password
 cp config.example config
+nano config 
+
+#build atomicDEX-API
+./init      
 ```
 
-Now edit the config file with your wallet passphrase and rpc password
+After the build is complete start the marketmaker daemon
 
 ```
 cd ~/mmtools
