@@ -1,0 +1,10 @@
+#!/bin/bash
+cd ~/atomicDEX-API
+
+git pull
+
+rustup install nightly
+rustup default nightly
+rustup component add rustfmt-preview
+
+cargo build --features native

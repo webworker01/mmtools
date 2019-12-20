@@ -1,0 +1,103 @@
+#!/bin/bash
+# functions file for mmtools
+#
+# @author webworker01
+#
+
+#31 = red (default)
+#32 = green
+#33 = yellow
+#34 = blue
+log()
+{
+    local category=$1
+    local message=$2
+    local color=$3
+    local mode=$4
+
+    case $color in
+        red)
+            colorcode=31
+            ;;
+        green)
+            colorcode=32
+            ;;
+        yellow)
+            colorcode=33
+            ;;
+        blue)
+            colorcode=34
+            ;;
+        *)
+            colorcode=32
+            ;;
+    esac
+
+    if [[ $mode != "echo" ]] && [[ ! -z $nntoolslogfile ]]; then
+        echo "${datetime} [${category}] ${message}" >> $nntoolslogfile
+    fi
+    if [[ $mode != "file" ]]; then
+        printf "\033[0;${colorcode}m${datetime} [${category}] ${message}\033[0m\n"
+    fi
+}
+
+sendRaw()
+{
+    local rawtx=$1
+    local acname=$2
+
+    if [[ ! -z $acname ]] && [[ $acname != "KMD" ]]; then
+        asset=" -ac_name=${acname}"
+    else
+        asset=""
+    fi
+
+    if [[ ! -z $rawtx ]]; then
+        # nlocktime=$(printf "%08x" $(date +%s) | dd conv=swab 2> /dev/null | rev)
+        nlocktime="00000000"
+
+        hex=${rawtx::-8}$nlocktime
+        txtail=000000000000000000000000000000
+        hex=${hex::-38}${nlocktime}${txtail}
+
+        signedtx=$($komodocli $asset signrawtransaction $hex | jq -r '.hex')
+
+        if [[ ! -z $signedtx ]]; then
+            rawtxid=$($komodocli $asset sendrawtransaction $signedtx)
+        else
+            rawtxid="failed no signed tx"
+        fi
+
+        echo "${rawtxid}"
+    else
+        echo "failed"
+    fi
+}
+
+timeSince ()
+{
+    local currentimestamp=$(date +%s)
+    local timecompare=$1
+
+    if [ ! -z $timecompare ] && [[ $timecompare != "null" ]]; then
+        local t=$((currentimestamp-timecompare))
+
+        local d=$((t/60/60/24))
+        local h=$((t/60/60%24))
+        local m=$((t/60%60))
+        local s=$((t%60))
+
+        if (( d > 0 )); then
+            echo -n "${d}D"
+        fi
+        if (( d < 2 && h > 0 )); then
+            echo -n "${h}h"
+        fi
+        if (( d == 0 && h < 4 && m > 0 )); then
+            echo -n "${m}m"
+        fi
+        if (( d == 0 && h == 0 && m == 0 )); then
+            echo -n "${s}s"
+        fi
+    fi
+}

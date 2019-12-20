@@ -1,0 +1,18 @@
+#!/bin/bash
+source config
+
+if [[ -z $1 ]] || [[ -z $2 ]] || [[ -z $3 ]]; then
+    echo "Usage: ./withdraw <coin> <address> <amount>"
+    exit 0
+fi
+
+coin1=$(echo $1 | tr [a-z] [A-Z]) #uppercase
+
+if [[ "$3" == "max" ]]; then
+    sendtx=$(jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"withdraw","coin":"'${coin1}'","to":"'${2}'","max":true,"userpass":"'${userpass}'"}'))
+else
+    sendtx=$(jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"withdraw","coin":"'${coin1}'","to":"'${2}'","amount":"'${3}'","userpass":"'${userpass}'"}'))
+fi
+
+echo "Send the signed raw tx e.g. :"
+echo "komodo-cli sendrawtransaction $(echo $sendtx | jq -r .tx_hex)"

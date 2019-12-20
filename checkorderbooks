@@ -12,14 +12,14 @@ coin2=$(echo $2 | tr [a-z] [A-Z]) #uppercase
 orderbooks=$(curl -s --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"orderbook\",\"base\":\"${coin1}\",\"rel\":\"${coin2}\"}")
 
 echo "--Bids (Selling ${coin2} for ${coin1})--"
-printf "%-7s %-34s %20s %20s %20s\n" "Coin" "Address" "Price" "Volume" "${coin1}/${coin2}"
-printf "%-7s %-34s %20s %20s %20s\n" "----" "-------" "-----" "----------" "---------"
-bids=$(jq -rc '.bids | sort_by(-(.askprice|tonumber)) | .[] | [.coin, .address, .price, .maxvolume, .askprice] | @tsv' <<< $orderbooks)
-awk '{printf("%-6s %35s %20.8f %20.8f %20.8f\n", $1, $2, $3, $4, $5)}' <<< $bids
+printf "%-7s %-34s %20s %20s %20s %20s\n" "Coin" "Address" "Price ${coin2}/${coin1}" "Volume ${coin1}" "Volume ${coin2}" "Price ${coin1}/${coin2}"
+printf "%-7s %-34s %20s %20s %20s %20s\n" "----" "-------" "-------------" "----------" "----------" "-------------"
+bids=$(jq -rc '.bids | sort_by((.price|tonumber)) | .[] | [.coin, .address, .price, ((.maxvolume|tonumber)/(.price|tonumber)), .maxvolume, (1/(.price|tonumber))] | @tsv' <<< $orderbooks)
+awk '{printf("%-6s %35s %20.8f %20.8f %20.8f %20.8f\n", $1, $2, $3, $4, $5, $6)}' <<< $bids
 
 echo
 echo "--Asks (Buying ${coin2} with ${coin1})--"
-printf "%-7s %-34s %20s %20s %20s\n" "Coin" "Address" "Price" "Volume" "${coin1}/${coin2}"
-printf "%-7s %-34s %20s %20s %20s\n" "----" "-------" "-----" "----------" "---------"
-asks=$(jq -r '.asks | sort_by((.price|tonumber)) | .[] | [.coin, .address, .price, .maxvolume, (1/(.price|tonumber))] | @tsv' <<< $orderbooks)
-awk '{printf("%-6s %35s %20.8f %20.8f %20.8f\n", $1, $2, $3, $4, $5)}' <<< $asks
+printf "%-7s %-34s %20s %20s %20s %20s\n" "Coin" "Address" "Price ${coin2}/${coin1}" "Volume ${coin1}" "Volume ${coin2}" "Price ${coin1}/${coin2}"
+printf "%-7s %-34s %20s %20s %20s %20s\n" "----" "-------" "-------------" "----------" "----------" "-------------"
+asks=$(jq -r '.asks | sort_by((.price|tonumber)) | .[] | [.coin, .address, .price, .maxvolume, ((.maxvolume|tonumber)*(.price|tonumber)), (1/(.price|tonumber))] | @tsv' <<< $orderbooks)
+awk '{printf("%-6s %35s %20.8f %20.8f %20.8f %20.8f\n", $1, $2, $3, $4, $5, $6)}' <<< $asks

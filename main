@@ -1,0 +1,11 @@
+#!/bin/bash
+#
+# Common startup for all scripts
+#
+# @author webworker01
+#
+scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+#imports
+source ${scriptpath}/config
+source ${scriptpath}/functions

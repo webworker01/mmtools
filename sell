@@ -1,0 +1,24 @@
+#!/bin/bash
+# example:
+# ./sell KMD BTC 0.0001 10000
+# tries to sell 10000 KMD at a price of 0.0001 BTC/KMD
+
+source config
+
+#price - the price in buycoin the user is willing to receive per one unit of the sellcoin coin
+#volume - the amount of coins the user is willing to sell of the sellcoin coin
+if [[ -z $1 ]] || [[ -z $2 ]] || [[ -z $3 ]] || [[ -z $4 ]]; then
+    echo "Usage: sell <sellcoin> <buycoin> <price=buycoin/sellcoin> <volume in sellcoin>"
+    exit 0
+fi
+
+coin1=$(echo $1 | tr [a-z] [A-Z]) #uppercase
+coin2=$(echo $2 | tr [a-z] [A-Z]) #uppercase
+
+minerfee=$(jq -r .result.amount <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"get_trade_fee","coin":"'${coin1}'","userpass":"'${userpass}'"}'))
+
+# 1/777 = 0.0012870012870013
+# 1 - 1/777 = 0.9987129987129987
+volume=$( printf "%.8f" $(bc -l <<< "($4 - $minerfee * 2) * 0.9987129987129987") )
+
+jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"sell","base":"'${coin1}'","rel":"'${coin2}'","price":"'${3}'","volume":"'${volume}'","userpass":"'${userpass}'"}')

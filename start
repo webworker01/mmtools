@@ -6,4 +6,4 @@ git submodule update --recursive
 cp ~/mmtools/jl777coins/coins ./coins
 
 cd ${mmpath}
-stdbuf -oL ./mm2 "{\"gui\":\"MM2GUI\",\"netid\":${netid}, \"userhome\":\"/${HOME#"/"}\", \"passphrase\":\"${passphrase}\", \"rpc_password\":\"${userpass}\"}" &
+stdbuf -oL ./mm2 "{\"gui\":\"mmtools\",\"netid\":${netid}, \"userhome\":\"/${HOME#"/"}\", \"passphrase\":\"${passphrase}\", \"rpc_password\":\"${userpass}\"}" &

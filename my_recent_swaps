@@ -1,4 +1,17 @@
 #!/bin/bash
-source config
+#
+# Show last 10 swaps
+#
+# @author webworker01
+#
+scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+source $scriptpath/main
 
-jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"my_recent_swaps","userpass":"'${userpass}'"}')
+swapdata=$(curl -s --url "http://127.0.0.1:7783" --data '{"method":"my_recent_swaps","limit":10,"userpass":"'${userpass}'"}')
+
+titleformat="%-6s %-38s %16s %29s %29s %20s %20s   %-20s"
+
+printf "$titleformat\n" "Type" "UUID" "Started" "Sold     " "Buy     " "Price (Sold/Buy)" "Price (Buy/Sold)" "Status"
+printf "$titleformat\n" "----" "----" "-------" "----     " "---     " "----------------" "----------------" "------"
+swaps=$(jq -rc '.result.swaps[] | [.type, .uuid, .my_info.started_at, .my_info.my_amount, .my_info.my_coin, .my_info.other_amount, .my_info.other_coin, ((.my_info.my_amount|tonumber)/(.my_info.other_amount|tonumber)), ((.my_info.other_amount|tonumber)/(.my_info.my_amount|tonumber)), .events[-1].event.type] | @tsv' <<< $swapdata)
+awk '{printf("%-6s %-38s %16s %20.8f %-8s %20.8f %-8s %20.8f %20.8f   %-20s\n", $1, $2, strftime("%F %R", $3), $4, $5, $6, $7, $8, $9, $10)}' <<< $swaps
