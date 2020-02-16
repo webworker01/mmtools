@@ -5,11 +5,11 @@ curl https://sh.rustup.rs -sSf | sh
 sudo apt-get install build-essential
 sudo apt-get install -y build-essential git llvm-3.9-dev libclang-3.9-dev clang-3.9 libssl-dev pkg-config jq bc gawk
 
-rustup install nightly
-rustup default nightly
+rustup install nightly-2020-02-01
+rustup default nightly-2020-02-01
 rustup component add rustfmt-preview
 
 cd ~
-git clone https://github.com/KomodoPlatform/atomicDEX-API --branch mm2 --single-branch
+git clone https://github.com/KomodoPlatform/atomicDEX-API --branch 2.0.1654 --single-branch
 cd ~/atomicDEX-API
 cargo build --features native -vv
