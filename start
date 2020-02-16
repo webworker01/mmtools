@@ -3,7 +3,7 @@ source config
 
 git submodule update --recursive
 
-cp ~/mmtools/jl777coins/coins ./coins
+cp ~/mmtools/jl777coins/coins ${mmpath}/coins
 
 cd ${mmpath}
 stdbuf -oL ./mm2 "{\"gui\":\"mmtools\",\"netid\":${netid}, \"userhome\":\"/${HOME#"/"}\", \"passphrase\":\"${passphrase}\", \"rpc_password\":\"${userpass}\"}" &
