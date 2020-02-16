@@ -11,5 +11,15 @@ git submodule update --recursive
 
 cp ~/mmtools/jl777coins/coins "${mmpath}coins"
 
+cat <<EOF > ${mmpath}/MM2.json
+{
+    "gui": "mmtools",
+    "netid": ${netid},
+    "rpc_password": "${userpass}",
+    "passphrase": "${passphrase}",
+    "userhome": "/${HOME#\"/\"}"
+}
+EOF
+
 cd ${mmpath}
-./mm2 "{\"gui\":\"mmtools\",\"netid\":${netid}, \"userhome\":\"/${HOME#"/"}\", \"passphrase\":\"${passphrase}\", \"rpc_password\":\"${userpass}\"}" &
+stdbuf -oL nohup ./mm2 &
