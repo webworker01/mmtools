@@ -22,4 +22,4 @@ cat <<EOF > ${mmpath}/MM2.json
 EOF
 
 cd ${mmpath}
-stdbuf -oL nohup ./mm2 &
+./mm2 &
