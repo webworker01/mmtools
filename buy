@@ -1,14 +1,14 @@
 #!/bin/bash
 # example:
-# ./buy KMD 10000 1
-# tries to buy 1 of BTC at a price of 10000 KMD/BTC
+# ./buy KMD BTC 10000 1
+# tries to buy 1 of KMD at a price of 10000 KMD/BTC
 
 source config
 
 #price - the price in sellcoin the user is willing to pay per one unit of the buycoin coin
 #volume - the amount of coins the user is willing to receive of the buycoin coin
 if [[ -z $1 ]] || [[ -z $2 ]] || [[ -z $3 ]] || [[ -z $4 ]]; then
-    echo "Usage: buy <buycoin> <sellcoin> <price (1*sellcoin = p * buycoin)> <volume>"
+    echo "Usage: buy <buycoin> <sellcoin> <price (buycoin/sellcoin)> <volume (buycoin)>"
     exit 0
 fi
 
