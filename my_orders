@@ -1,5 +1,12 @@
 #!/bin/bash
-source config
+#
+# Get current orders
+#
+# @author webworker01
+# @link https://developers.atomicdex.io/basic-docs/atomicdex/atomicdex-api.html#my-orders
+#
+scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+source $scriptpath/main
 
 jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"my_orders","userpass":"'${userpass}'"}')
 echo

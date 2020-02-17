@@ -1,18 +1,23 @@
 #!/bin/bash
-source config
+#
+# Set a maker order
+#
+# @author webworker01
+# @link https://developers.atomicdex.io/basic-docs/atomicdex/atomicdex-api.html#setprice
+#
+scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+source $scriptpath/main
 
 if [[ -z $1 ]] || [[ -z $2 ]] || [[ -z $3 ]] || [[ -z $4 ]]; then
     echo "Usage: setprice <sellcoin> <receivecoin> <price (1*sellcoin = p*receivecoin)> <volume (amount or max)>"
     exit 0
 fi
 
-coin1=$(echo $1 | tr [a-z] [A-Z]) #uppercase
-coin2=$(echo $2 | tr [a-z] [A-Z]) #uppercase
+coin1=${1^^}
+coin2=${2^^}
 
 if [[ "$4" == "max" ]]; then
     jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"setprice","base":"'${coin1}'","rel":"'${coin2}'","price":"'${3}'","max":true,"userpass":"'${userpass}'"}')
 else
     jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"setprice","base":"'${coin1}'","rel":"'${coin2}'","price":"'${3}'","volume":"'${4}'","userpass":"'${userpass}'"}')
 fi
-
-

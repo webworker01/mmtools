@@ -1,12 +1,20 @@
 #!/bin/bash
-source config
+#
+# Create a signed raw tx to send funds away.
+# You must then broadcast the tx.
+#
+# @author webworker01
+# @link https://developers.atomicdex.io/basic-docs/atomicdex/atomicdex-api.html#withdraw
+#
+scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+source $scriptpath/main
 
 if [[ -z $1 ]] || [[ -z $2 ]] || [[ -z $3 ]]; then
     echo "Usage: ./withdraw <coin> <address> <amount>"
     exit 0
 fi
 
-coin1=$(echo $1 | tr [a-z] [A-Z]) #uppercase
+coin1=${1^^}
 
 if [[ "$3" == "max" ]]; then
     sendtx=$(jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"withdraw","coin":"'${coin1}'","to":"'${2}'","max":true,"userpass":"'${userpass}'"}'))

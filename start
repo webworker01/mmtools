@@ -2,7 +2,7 @@
 #
 # Start mm2
 #
-# @author webowrker01
+# @author webworker01
 #
 scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 source $scriptpath/main
@@ -26,6 +26,4 @@ cd ${mmpath}
 
 sleep 7
 
-for enable_coin in $(curl -s --url "http://127.0.0.1:7783" --data '{"userpass":"'${userpass}'","method":"coins_needed_for_kick_start"}' | jq -r .result[]); do
-    $scriptpath/enable $enable_coin
-done
+$scriptpath/coins_needed_for_kick_start

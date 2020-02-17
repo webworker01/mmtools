@@ -2,7 +2,8 @@
 #
 # Attempt to recover funds from a failed swap
 #
-# @author webowrker01
+# @author webworker01
+# @link https://developers.atomicdex.io/basic-docs/atomicdex/atomicdex-api.html#recover-funds-of-swap
 #
 scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 source $scriptpath/main

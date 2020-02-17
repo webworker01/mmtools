@@ -1,13 +1,19 @@
 #!/bin/bash
-source config
+#
+# Output nicely formatted orderbooks
+#
+# @author webworker01
+#
+scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+source $scriptpath/main
 
 if [[ -z $1 ]] || [[ -z $2 ]]; then
     echo "Usage: ./checkorderbooks <base> <reL>"
     exit 0
 fi
 
-coin1=$(echo $1 | tr [a-z] [A-Z]) #uppercase
-coin2=$(echo $2 | tr [a-z] [A-Z]) #uppercase
+coin1=${1^^}
+coin2=${2^^}
 
 orderbooks=$(curl -s --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"orderbook\",\"base\":\"${coin1}\",\"rel\":\"${coin2}\"}")
 

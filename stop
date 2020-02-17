@@ -1,4 +1,11 @@
 #!/bin/bash
-source config
+#
+# Stop mm2
+#
+# @author webworker01
+# @link https://developers.atomicdex.io/basic-docs/atomicdex/atomicdex-api.html#stop
+#
+scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+source $scriptpath/main
 
 jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"stop","userpass":"'${userpass}'"}')

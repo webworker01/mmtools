@@ -1,0 +1,13 @@
+#!/bin/bash
+#
+# Cancel an order by UUID
+#
+# @author webworker01
+# @link https://developers.atomicdex.io/basic-docs/atomicdex/atomicdex-api.html#cancel-order
+#
+scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+source $scriptpath/main
+
+uuid=${1}
+
+jq <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"cancel_order", "uuid":"'${uuid}'","userpass":"'${userpass}'"}')

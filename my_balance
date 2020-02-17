@@ -1,11 +1,18 @@
 #!/bin/bash
-source config
+#
+# Get balance for an enabled coin
+#
+# @author webworker01
+# @link https://developers.atomicdex.io/basic-docs/atomicdex/atomicdex-api.html#my-balance
+#
+scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+source $scriptpath/main
 
 if [[ -z $1 ]]; then
     echo "You must specify a coin"
     exit 0
 fi
 
-coin=$(echo $1 | tr [a-z] [A-Z]) #uppercase
+coin=${1^^}
 
 jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"my_balance","coin":"'${coin}'","userpass":"'${userpass}'"}')

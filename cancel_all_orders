@@ -1,5 +1,12 @@
 #!/bin/bash
-source config
+#
+# Cancel all active orders
+#
+# @author webworker01
+# @link https://developers.atomicdex.io/basic-docs/atomicdex/atomicdex-api.html#cancel-all-orders
+#
+scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+source $scriptpath/main
 
 if [[ -z $1 ]] && [[ -z $2 ]]; then
     cancelby=$(jq -c '{"type": "All"}' <<< {})

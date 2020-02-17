@@ -1,5 +1,12 @@
 #!/bin/bash
-source config
+#
+# Get recent tx for a coin
+#
+# @author webworker01
+# @link https://developers.atomicdex.io/basic-docs/atomicdex/atomicdex-api.html#my-tx-history
+#
+scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+source $scriptpath/main
 
 if [[ -z $1 ]]; then
     echo "You must specify a coin"
@@ -12,6 +19,6 @@ else
     limit=$2
 fi
 
-coin=$(echo $1 | tr [a-z] [A-Z]) #uppercase
+coin=${1^^}
 
 jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"my_tx_history","coin":"'${coin}'","limit":"'${limit}'","userpass":"'${userpass}'"}')

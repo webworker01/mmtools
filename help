@@ -1,4 +1,11 @@
 #!/bin/bash
-source config
+#
+# Enable a coin via electrum
+#
+# @author webworker01
+# @link https://developers.atomicdex.io/basic-docs/atomicdex/atomicdex-api.html#help
+#
+scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+source $scriptpath/main
 
-curl --url "http://127.0.0.1:7783" --data '{"method":"help","userpass":"'${userpass}'"}'
+curl -s --url "http://127.0.0.1:7783" --data '{"method":"help","userpass":"'${userpass}'"}'

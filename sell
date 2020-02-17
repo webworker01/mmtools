@@ -2,8 +2,12 @@
 # example:
 # ./sell KMD BTC 0.0001 10000
 # tries to sell 10000 KMD at a price of 0.0001 BTC/KMD
-
-source config
+#
+# @author webworker01
+# @link https://developers.atomicdex.io/basic-docs/atomicdex/atomicdex-api.html#sell
+#
+scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+source $scriptpath/main
 
 #price - the price in buycoin the user is willing to receive per one unit of the sellcoin coin
 #volume - the amount of coins the user is willing to sell of the sellcoin coin
@@ -12,8 +16,8 @@ if [[ -z $1 ]] || [[ -z $2 ]] || [[ -z $3 ]] || [[ -z $4 ]]; then
     exit 0
 fi
 
-coin1=$(echo $1 | tr [a-z] [A-Z]) #uppercase
-coin2=$(echo $2 | tr [a-z] [A-Z]) #uppercase
+coin1=${1^^}
+coin2=${1^^}
 
 minerfee=$(jq -r .result.amount <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"get_trade_fee","coin":"'${coin1}'","userpass":"'${userpass}'"}'))
 
