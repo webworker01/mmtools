@@ -15,4 +15,4 @@ fi
 
 coin=${1^^}
 
-jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"disable_coin","coin":"'${coin}'","servers":'${electrumstring}',"userpass":"'${userpass}'"}')
+jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"disable_coin","coin":"'${coin}'","userpass":"'${userpass}'"}')
