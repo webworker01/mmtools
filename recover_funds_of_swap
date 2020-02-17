@@ -1,0 +1,14 @@
+#!/bin/bash
+#
+# Attempt to recover funds from a failed swap
+#
+# @author webowrker01
+#
+scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+source $scriptpath/main
+
+uuid=${1}
+
+recover_data=$(curl -s --url "http://127.0.0.1:7783" --data '{"method":"recover_funds_of_swap","params":{"uuid":"'${uuid}'"},"userpass":"'${userpass}'"}')
+
+echo $recover_data | jq
