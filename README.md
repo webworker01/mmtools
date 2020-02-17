@@ -11,10 +11,10 @@ git submodule update --init --recursive
 
 #edit the config file with your wallet passphrase and rpc password
 cp config.example config
-nano config 
+nano config
 
 #build atomicDEX-API
-./init      
+./init
 ```
 
 After the build is complete start the marketmaker daemon
@@ -35,5 +35,5 @@ cd ~/mmtools
 Ready to go!
 
 ```
-./checkorderbooks rick morty
+./orderbook rick morty
 ```

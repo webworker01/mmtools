@@ -1,6 +1,7 @@
 #!/bin/bash
 #
 # Enable a coin via native daemon (bitcoin based only currently)
+# With automation=1 it will also attempt to set required confirmations
 #
 # @author webworker01
 # @link https://developers.atomicdex.io/basic-docs/atomicdex/atomicdex-api.html#enable
@@ -17,4 +18,6 @@ coin=${1^^}
 
 jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"enable","coin":"'${coin}'","userpass":"'${userpass}'"}')
 
-${scriptpath}/set_required_confirmations ${coin} ${required_confirmations}
+if (( $automation > 0 )); then
+    ${scriptpath}/set_required_confirmations ${coin} ${required_confirmations}
+fi

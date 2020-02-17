@@ -33,8 +33,8 @@ log()
             ;;
     esac
 
-    if [[ $mode != "echo" ]] && [[ ! -z $nntoolslogfile ]]; then
-        echo "${datetime} [${category}] ${message}" >> $nntoolslogfile
+    if [[ $mode != "echo" ]] && [[ ! -z $mmtoolslogfile ]]; then
+        echo "${datetime} [${category}] ${message}" >> $mmtoolslogfile
     fi
     if [[ $mode != "file" ]]; then
         printf "\033[0;${colorcode}m${datetime} [${category}] ${message}\033[0m\n"

@@ -1,6 +1,7 @@
 #!/bin/bash
 #
 # Enable a coin via electrum
+# With automation=1 it will also attempt to set required confirmations
 #
 # @author webworker01
 # @link https://developers.atomicdex.io/basic-docs/atomicdex/atomicdex-api.html#electrum
@@ -27,4 +28,6 @@ fi
 
 jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"electrum","coin":"'${coin}'","servers":'${electrumstring}',"userpass":"'${userpass}'"}')
 
-${scriptpath}/set_required_confirmations ${coin} ${required_confirmations}
+if (( $automation > 0 )); then
+    ${scriptpath}/set_required_confirmations ${coin} ${required_confirmations}
+fi

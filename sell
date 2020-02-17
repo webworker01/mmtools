@@ -1,7 +1,9 @@
 #!/bin/bash
-# example:
-# ./sell KMD BTC 0.0001 10000
-# tries to sell 10000 KMD at a price of 0.0001 BTC/KMD
+#
+# Automatically sets a taker order with miner and dex fees calculated
+#
+# Usage: ./sell kmd btc 0.0001 10000
+# (Tries to sell 10000 KMD at a price of 0.0001 BTC/KMD)
 #
 # @author webworker01
 # @link https://developers.atomicdex.io/basic-docs/atomicdex/atomicdex-api.html#sell

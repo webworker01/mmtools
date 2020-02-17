@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Get recent tx for a coin
+# Get recent tx for a coin (default 10)
 #
 # @author webworker01
 # @link https://developers.atomicdex.io/basic-docs/atomicdex/atomicdex-api.html#my-tx-history

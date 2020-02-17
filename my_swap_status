@@ -10,6 +10,4 @@ source $scriptpath/main
 
 uuid=${1}
 
-swapdata=$(curl -s --url "http://127.0.0.1:7783" --data '{"method":"my_swap_status","params":{"uuid":"'${uuid}'"},"userpass":"'${userpass}'"}')
-
-echo $swapdata | jq
+jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"my_swap_status","params":{"uuid":"'${uuid}'"},"userpass":"'${userpass}'"}')

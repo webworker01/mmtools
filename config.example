@@ -10,6 +10,9 @@
 #Path to mm2 executables
 mmpath=${HOME}/atomicDEX-API/target/debug/
 
+#Location for mmtools.log or set to blank to disable
+mmtoolslogfile=$HOME/mmtools.log
+
 #Net ID to join
 netid=9999
 
@@ -21,3 +24,6 @@ userpass=
 
 #Required confirmations
 required_confirmations=2
+
+# (1|0) Enable automation helpers? e.g. automatically set required confs after enabling a coin
+automation=1

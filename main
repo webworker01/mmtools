@@ -14,3 +14,4 @@ source ${scriptpath}/functions
 #defaults
 netid=${netid:=9999}
 required_confirmations=${required_confirmations:=2}
+automation=${automation:=1}
