@@ -1,6 +1,8 @@
 # mmtools
 Bash CLI tools for MM2
 
+![orderbook.png](./img/orderbook.png)
+
 ## Setup
 
 ```
