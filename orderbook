@@ -2,6 +2,8 @@
 #
 # Output nicely formatted orderbooks
 #
+# Usage: ./orderbook btc kmd
+#
 # @author webworker01
 # @link https://developers.atomicdex.io/basic-docs/atomicdex/atomicdex-api.html#orderbook
 #

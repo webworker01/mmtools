@@ -1,0 +1,13 @@
+#!/bin/bash
+#
+# Gets the estimated miner fee for a trade
+#
+# @author webworker01
+# @link https://developers.atomicdex.io/basic-docs/atomicdex/atomicdex-api.html#get-trade-fee
+#
+scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+source $scriptpath/main
+
+coin=${1^^}
+
+jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"get_trade_fee","coin":"'${coin}'", "userpass":"'${userpass}'"}')

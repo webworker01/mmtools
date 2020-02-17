@@ -1,0 +1,18 @@
+#!/bin/bash
+#
+# Set required number of confirmations during trade steps
+#
+# @author webworker01
+# @link https://developers.atomicdex.io/basic-docs/atomicdex/atomicdex-api.html#set-required-confirmations
+#
+scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+source $scriptpath/main
+
+if [[ -z $1 ]]; then
+    echo "You must specify a coin"
+    exit 0
+fi
+
+coin=${1^^}
+
+jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"set_required_confirmations","coin":"'${coin}'","confirmations":'${required_confirmations}',"userpass":"'${userpass}'"}')

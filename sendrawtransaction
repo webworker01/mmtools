@@ -1,0 +1,19 @@
+#!/bin/bash
+#
+# Send a signed raw tx
+#
+# @author webworker01
+# @link https://developers.atomicdex.io/basic-docs/atomicdex/atomicdex-api.html#sell
+#
+scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+source $scriptpath/main
+
+if [[ -z $1 ]] || [[ -z $2 ]]; then
+    echo "Usage: sendrawtransaction <coin> <signedtx>"
+    exit 0
+fi
+
+coin=${1^^}
+signedtx=${2}
+
+jq <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"send_raw_transaction","coin":"'${coin}'","tx_hex":"'${signedtx}'","userpass":"'${userpass}'"}')

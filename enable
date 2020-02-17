@@ -16,4 +16,5 @@ fi
 coin=${1^^}
 
 jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"enable","coin":"'${coin}'","userpass":"'${userpass}'"}')
-jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"set_required_confirmations","coin":"'${coin}'","confirmations":'${required_confirmations}',"userpass":"'${userpass}'"}')
+
+${scriptpath}/set_required_confirmations ${coin} ${required_confirmations}
