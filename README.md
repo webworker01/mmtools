@@ -30,8 +30,8 @@ In another window run:
 
 ```
 cd ~/mmtools
-./enable RICK
-./enable MORTY
+./electrum RICK
+./electrum MORTY
 ```
 
 Ready to go!
