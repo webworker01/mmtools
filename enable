@@ -14,7 +14,7 @@ fi
 
 coin=$(echo $1 | tr [a-z] [A-Z]) #uppercase
 
-filename="./jl777coins/electrums/${coin}"
+filename="${scriptpath}/jl777coins/electrums/${coin}"
 if test -f ${filename}; then
     echo "${coin} exists! Connecting..."
 
