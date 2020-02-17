@@ -3,12 +3,13 @@
 # Output nicely formatted orderbooks
 #
 # @author webworker01
+# @link https://developers.atomicdex.io/basic-docs/atomicdex/atomicdex-api.html#orderbook
 #
 scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 source $scriptpath/main
 
 if [[ -z $1 ]] || [[ -z $2 ]]; then
-    echo "Usage: ./checkorderbooks <base> <reL>"
+    echo "Usage: ./orderbook <base> <reL>"
     exit 0
 fi
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Enable a coin via electrum
+# Enable a coin via native daemon (bitcoin based only currently)
 #
 # @author webworker01
 # @link https://developers.atomicdex.io/basic-docs/atomicdex/atomicdex-api.html#enable
@@ -13,17 +13,7 @@ if [[ -z $1 ]]; then
     exit 0
 fi
 
-coin=$(echo $1 | tr [a-z] [A-Z]) #uppercase
+coin=${1^^}
 
-filename="${scriptpath}/jl777coins/electrums/${coin}"
-if test -f ${filename}; then
-    echo "${coin} exists! Connecting..."
-
-    electrumstring=$(jq -c '[{url:.[].url}]' $filename)
-else
-    echo "Coin electrum file doesn't exist"
-    exit 0
-fi
-
-jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"electrum","coin":"'${coin}'","servers":'${electrumstring}',"userpass":"'${userpass}'"}')
+jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"enable","coin":"'${coin}'","userpass":"'${userpass}'"}')
 jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"set_required_confirmations","coin":"'${coin}'","confirmations":'${required_confirmations}',"userpass":"'${userpass}'"}')

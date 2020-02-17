@@ -1,0 +1,29 @@
+#!/bin/bash
+#
+# Enable a coin via electrum
+#
+# @author webworker01
+# @link https://developers.atomicdex.io/basic-docs/atomicdex/atomicdex-api.html#electrum
+#
+scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+source $scriptpath/main
+
+if [[ -z $1 ]]; then
+    echo "You must specify a coin"
+    exit 0
+fi
+
+coin=${1^^}
+
+filename="${scriptpath}/jl777coins/electrums/${coin}"
+if test -f ${filename}; then
+    echo "${coin} exists! Connecting..."
+
+    electrumstring=$(jq -c '[{url:.[].url}]' $filename)
+else
+    echo "Coin electrum file doesn't exist"
+    exit 0
+fi
+
+jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"electrum","coin":"'${coin}'","servers":'${electrumstring}',"userpass":"'${userpass}'"}')
+jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"set_required_confirmations","coin":"'${coin}'","confirmations":'${required_confirmations}',"userpass":"'${userpass}'"}')

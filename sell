@@ -17,7 +17,7 @@ if [[ -z $1 ]] || [[ -z $2 ]] || [[ -z $3 ]] || [[ -z $4 ]]; then
 fi
 
 coin1=${1^^}
-coin2=${1^^}
+coin2=${2^^}
 
 minerfee=$(jq -r .result.amount <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"get_trade_fee","coin":"'${coin1}'","userpass":"'${userpass}'"}'))
 

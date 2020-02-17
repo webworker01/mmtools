@@ -9,5 +9,5 @@ scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 source $scriptpath/main
 
 for enable_coin in $(curl -s --url "http://127.0.0.1:7783" --data '{"userpass":"'${userpass}'","method":"coins_needed_for_kick_start"}' | jq -r .result[]); do
-    $scriptpath/enable $enable_coin
+    $scriptpath/electrum $enable_coin
 done

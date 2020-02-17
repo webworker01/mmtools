@@ -16,8 +16,8 @@ elif [[ -z $1 ]] || [[ -z $2 ]]; then
     exit 0
 
 else
-    coin1=$(echo $1 | tr [a-z] [A-Z]) #uppercase
-    coin2=$(echo $2 | tr [a-z] [A-Z]) #uppercase
+    coin1=${1^^}
+    coin2=${2^^}
 
     cancelby=$(jq -c --arg base ${coin1} --arg rel ${coin2} '{"type": "Pair", "data": {"base": $base, "rel": $rel}}' <<< {})
 fi
