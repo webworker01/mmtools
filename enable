@@ -1,5 +1,11 @@
 #!/bin/bash
-source config
+#
+# Enable a coin via electrum
+#
+# @author webowrker01
+#
+scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+source $scriptpath/main
 
 if [[ -z $1 ]]; then
     echo "You must specify a coin"
