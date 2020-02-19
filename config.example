@@ -16,8 +16,9 @@ mmtoolslogfile=$HOME/mmtools.log
 #Net ID to join
 netid=9999
 
-#Wallet Passphrase
-passphrase=
+#Wallet Passphrase / Seed Phrase
+#Put double quotes around passphrases with spaces in them
+passphrase=""
 
 #RPC password
 userpass=
