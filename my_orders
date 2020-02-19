@@ -8,5 +8,5 @@
 scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 source $scriptpath/main
 
-jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"my_orders","userpass":"'${userpass}'"}')
+jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"my_orders","userpass":"'${userpass}'"}')  | jq -M 'del(.. | .max_volume_rat?,.min_base_vol_rat?,.price_rat?,.max_base_vol_rat?)'
 echo
