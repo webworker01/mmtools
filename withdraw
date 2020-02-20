@@ -3,6 +3,8 @@
 # Create a signed raw tx to send funds away.
 # With automation=1 it will attempt to automatically send the tx as well
 #
+# @todo add error checking for addresses and amounts
+#
 # @author webworker01
 # @link https://developers.atomicdex.io/basic-docs/atomicdex/atomicdex-api.html#withdraw
 #
@@ -14,15 +16,16 @@ if [[ -z $1 ]] || [[ -z $2 ]] || [[ -z $3 ]]; then
     exit 0
 fi
 
-coin1=${1^^}
+coin=${1^^}
 
 if [[ "$3" == "max" ]]; then
-    sendtx=$(jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"withdraw","coin":"'${coin1}'","to":"'${2}'","max":true,"userpass":"'${userpass}'"}'))
+    sendtx=$(jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"withdraw","coin":"'${coin}'","to":"'${2}'","max":true,"userpass":"'${userpass}'"}'))
 else
-    sendtx=$(jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"withdraw","coin":"'${coin1}'","to":"'${2}'","amount":"'${3}'","userpass":"'${userpass}'"}'))
+    sendtx=$(jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"withdraw","coin":"'${coin}'","to":"'${2}'","amount":"'${3}'","userpass":"'${userpass}'"}'))
 fi
 
 if (( $automation > 0 )); then
-    log "withdraw" "Attempting to send ${sendtx}"
-    ${scriptpath}/sendrawtransaction ${coin} ${sendtx}
+    txid=$(echo $sendtx | jq -r .tx_hex)
+    log "withdraw" "Attempting to send ${txid}"
+    ${scriptpath}/sendrawtransaction ${coin} ${txid}
 fi
