@@ -14,7 +14,7 @@ source $scriptpath/main
 #price - the price in buycoin the user is willing to receive per one unit of the sellcoin coin
 #volume - the amount of coins the user is willing to sell of the sellcoin coin
 if [[ -z $1 ]] || [[ -z $2 ]] || [[ -z $3 ]] || [[ -z $4 ]]; then
-    echo "Usage: sell <sellcoin> <buycoin> <price=buycoin/sellcoin> <volume in sellcoin>"
+    echo "Usage: sell <sellcoin> <buycoin> <price=buycoin/sellcoin> <volume (sellcoin)>"
     exit 0
 fi
 
