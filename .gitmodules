@@ -1,3 +1,3 @@
-[submodule "jl777coins"]
-	path = jl777coins
-	url = https://github.com/jl777/coins.git
+[submodule "coins"]
+	path = coins
+	url = https://github.com/komodoplatform/coins.git
