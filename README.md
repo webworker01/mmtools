@@ -1,6 +1,8 @@
 # mmtools
 Bash CLI tools for MM2
 
+Scripts in this repo work together as a whole, please follow the setup steps before usage.
+
 ![orderbook.png](./img/orderbook.png)
 
 ## Setup
