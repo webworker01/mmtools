@@ -8,8 +8,7 @@ scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 source $scriptpath/main
 
 git submodule update --recursive
-
-cp ~/mmtools/jl777coins/coins "${mmpath}coins"
+# cp ~/mmtools/jl777coins/coins "${mmpath}coins"
 
 cat <<EOF > ${mmpath}/MM2.json
 {

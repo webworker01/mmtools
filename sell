@@ -23,8 +23,7 @@ coin2=${2^^}
 
 minerfee=$(jq -r .result.amount <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"get_trade_fee","coin":"'${coin1}'","userpass":"'${userpass}'"}'))
 
-# 1/777 = 0.0012870012870013
-# 1 - 1/777 = 0.9987129987129987
-volume=$( printf "%.8f" $(bc -l <<< "($4 - $minerfee * 2) * 0.9987129987129987") )
+# volume=$( printf "%.8f" $(bc -l <<< "($4 - $minerfee * 2) * (1 - 1 / 777)") )
+volume=$( printf "%.8f" $(bc -l <<< "$4 * (1 - 1 / 777) - $minerfee * 2") )
 
 jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"sell","base":"'${coin1}'","rel":"'${coin2}'","price":"'${3}'","volume":"'${volume}'","userpass":"'${userpass}'"}')

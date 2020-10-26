@@ -16,7 +16,7 @@ fi
 
 coin=${1^^}
 
-filename="${scriptpath}/jl777coins/electrums/${coin}"
+filename="${scriptpath}/coins/electrums/${coin}"
 if test -f ${filename}; then
     echo "${coin} exists! Connecting..."
 

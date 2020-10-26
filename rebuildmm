@@ -1,9 +1,16 @@
 #!/bin/bash
+#
+# Use this to rebuild, update the tag to checkout below
+#
+# https://github.com/KomodoPlatform/atomicDEX-API#how-to-build
+#
+# @author webworker01
+#
 cd ~/atomicDEX-API
 
 # git pull
 git fetch --all --tags
-git checkout 2.0.1654
+git checkout beta-2.0.2379
 
 rustup install nightly-2020-02-01
 rustup default nightly-2020-02-01

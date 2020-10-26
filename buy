@@ -1,8 +1,9 @@
 #!/bin/bash
 #
 # Automatically sets a buy order with miner and dex fees calculated
+#
 # Usage: ./buy kmd btc 10000 1
-# (Tries to buy 1 of KMD at a price of 10000 KMD/BTC)
+# (Tries to buy 1 KMD at a price of 10000 KMD/BTC)
 #
 # @author webworker01
 # @see https://developers.atomicdex.io/basic-docs/atomicdex/atomicdex-api.html#buy
@@ -22,8 +23,6 @@ coin2=${2^^}
 
 minerfee=$(jq -r .result.amount <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"get_trade_fee","coin":"'${coin2}'","userpass":"'${userpass}'"}'))
 
-# 1/777 = 0.0012870012870013
-# 1 - 1/777 = 0.9987129987129987
-volume=$( printf "%.8f" $(bc -l <<< "($4 - $minerfee * 2) * 0.9987129987129987") )
+volume=$( printf "%.8f" $(bc -l <<< "($4 - $minerfee * 2) * (1 - 1 / 777)") )
 
 jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"buy","base":"'${coin1}'","rel":"'${coin2}'","price":"'${3}'","volume":"'${volume}'","userpass":"'${userpass}'"}')
