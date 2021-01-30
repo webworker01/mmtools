@@ -22,3 +22,7 @@ git clone https://github.com/KomodoPlatform/atomicDEX-API
 cd ~/atomicDEX-API
 git checkout beta-2.0.2379
 cargo build --features native -vv
+
+cd $scriptpath
+git clone https://github.com/komodoplatform/coins.git
+
