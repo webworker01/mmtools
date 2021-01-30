@@ -3,7 +3,7 @@ Bash CLI tools for MM2
 
 Scripts in this repo work together as a whole, please follow the setup steps before usage.
 
-The scripts in this repo are meant to be an educational and functional interaction wiht the mm2 API.
+The scripts in this repo are meant to be an educational and functional interaction with the mm2 API.  Each script contains in the beginning a link to the specific API call it is making so you can learn more details and create your own application to interact with the DEX.
 
 * ![AtomicDex MM2 API Docs](https://developers.atomicdex.io/basic-docs/atomicdex/atomicdex-api.html)
 * ![AtomicDex MM2 Repository](https://github.com/KomodoPlatform/atomicDEX-API)
