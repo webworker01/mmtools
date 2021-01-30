@@ -10,8 +10,6 @@ cd ~/atomicDEX-API
 
 # git pull
 git fetch --all --tags
-#git checkout beta-2.0.2379
-#git checkout beta-2.1.2940
 git checkout beta-2.1.2986
 
 rustup install nightly-2020-10-25

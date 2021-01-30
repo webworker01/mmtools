@@ -11,7 +11,6 @@ Scripts in this repo work together as a whole, please follow the setup steps bef
 cd ~
 git clone https://github.com/webworker01/mmtools.git
 cd ~/mmtools
-git submodule update --init --recursive
 
 #edit the config file with your wallet passphrase and rpc password
 cp config.example config
