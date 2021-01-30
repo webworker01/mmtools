@@ -31,8 +31,8 @@ In another window run:
 
 ```
 cd ~/mmtools
-./electrum RICK
-./electrum MORTY
+./electrum rick
+./electrum morty
 ```
 
 Ready to go!
