@@ -14,7 +14,7 @@ mmpath=${HOME}/atomicDEX-API/target/debug/
 mmtoolslogfile=$HOME/mmtools.log
 
 #Net ID to join
-netid=9999
+netid=7777
 
 #Wallet Passphrase / Seed Phrase
 #Put double quotes around passphrases with spaces in them
