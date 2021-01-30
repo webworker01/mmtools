@@ -7,7 +7,9 @@ The scripts in this repo are meant to be an educational and functional interacti
 
 * [AtomicDex MM2 API Docs](https://developers.atomicdex.io/basic-docs/atomicdex/atomicdex-api.html)
 * [AtomicDex MM2 Repository](https://github.com/KomodoPlatform/atomicDEX-API)
+* [AtomicDex Coins Repository](https://github.com/KomodoPlatform/coins)
 * [AtomicDex Desktop](https://github.com/KomodoPlatform/atomicDEX-Desktop) (if you don't want to use CLI)
+
 
 ![orderbook.png](./img/orderbook.png)
 
