@@ -18,7 +18,10 @@ coin=${1^^}
 
 filename="${scriptpath}/coins/electrums/${coin}"
 if test -f ${filename}; then
-    electrumstring=$(jq -c '[.[] | {url:.url, protocol:.protocol}]' $filename)
+    electrumstring=$(jq -c '[.[] | select(.protocol=="SSL") | {url:.url, protocol:.protocol}]' $filename)
+    if [[ ${electrumstring} == "[]" ]]; then
+        electrumstring=$(jq -c '[.[] | {url:.url, protocol:.protocol}]' $filename)
+    fi
 else
     echo "Coin electrum file doesn't exist"
     exit 0
