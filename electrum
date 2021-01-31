@@ -18,15 +18,16 @@ coin=${1^^}
 
 filename="${scriptpath}/coins/electrums/${coin}"
 if test -f ${filename}; then
-    echo "${coin} exists! Connecting..."
-
-    electrumstring=$(jq -c '[{url:.[].url}]' $filename)
+    electrumstring=$(jq -c '[.[] | {url:.url, protocol:.protocol}]' $filename)
 else
     echo "Coin electrum file doesn't exist"
     exit 0
 fi
-echo $electrumstring
 
+electrumstring=${electrumstring//\"protocol\":null/\"protocol\":\"TCP\"}
+
+echo "${coin} exists! Connecting..."
+echo ${electrumstring}
 jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"electrum","coin":"'${coin}'","servers":'${electrumstring}',"userpass":"'${userpass}'"}')
 
 if (( $automation > 0 )); then
