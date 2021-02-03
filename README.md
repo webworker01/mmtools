@@ -20,12 +20,16 @@ cd ~
 git clone https://github.com/webworker01/mmtools.git
 cd ~/mmtools
 
+#build atomicDEX-API
+./init
+```
+
+Init will help create a config file and ask if you want to generate a random wallet passphrase and userpass. If you do not want to use this, cancel the init script and first set up your own and run init again.
+
+```
 #edit the config file with your wallet passphrase and rpc password
 cp config.example config
 nano config
-
-#build atomicDEX-API
-./init
 ```
 
 After the build is complete start the marketmaker daemon

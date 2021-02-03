@@ -27,4 +27,10 @@ cd ${mmpath}
 
 sleep 7
 
-$scriptpath/coins_needed_for_kick_start
+if (( automation > 0 )); then
+    for enable_coin in ${auto_electrum[@]}; do
+        $scriptpath/electrum $enable_coin
+    done
+
+    $scriptpath/coins_needed_for_kick_start
+fi

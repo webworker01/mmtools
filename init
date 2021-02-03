@@ -6,7 +6,37 @@
 # @author webworker01
 #
 scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-source $scriptpath/main
+
+if [[ ! -f ${scriptpath}/config ]]; then
+  read -p "No config file detected, do you want to set one up? (y/n)" -n 1 -r
+  echo
+  if [[ $REPLY =~ ^[Yy]$ ]]; then
+      # do dangerous stuff
+      cp ${scriptpath}/config.example ${scriptpath}/config
+      source $scriptpath/main
+
+      read -p "Generate random wallet passphrase? (y/n)" -n 1 -r
+      echo
+      if [[ $REPLY =~ ^[Yy]$ ]]; then
+        generated_passphrase=$(rand)
+
+        # echo $(awk -v var="passphrase" -v new_val="${generated_passphrase}" 'BEGIN{FS=OFS="="}match($1, "^\\s*" var "\\s*") {$2="" new_val}1' ${scriptpath}/config) > ${scriptpath}/config
+
+        sed -i "s/passphrase=\"\"/passphrase=${generated_passphrase}/g" ${scriptpath}/config
+      fi
+
+      read -p "Generate random rpc userpass? (y/n)" -n 1 -r
+      echo
+      if [[ $REPLY =~ ^[Yy]$ ]]; then
+        generated_userpass=$(rand)
+
+        # echo $(awk -v var="userpass" -v new_val="${generated_userpass}" 'BEGIN{FS=OFS="="}match($1, "^\\s*" var "\\s*") {$2="" new_val}1' ${scriptpath}/config) > ${scriptpath}/config
+        sed -i "s/userpass=/userpass=${generated_userpass}/g" ${scriptpath}/config
+      fi
+  fi
+else
+  source $scriptpath/main
+fi
 
 curl https://sh.rustup.rs -sSf | sh
 

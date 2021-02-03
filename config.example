@@ -31,3 +31,6 @@ automation=1
 
 # (1|0) Enable remote data from komodostats.com for price info etc
 remote=1
+
+# Auto connect to these electrums on ./start (requires automation=1)
+auto_electrum=('KMD' 'VRSC' 'WSB' 'SOULJA')

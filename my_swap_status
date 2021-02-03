@@ -8,6 +8,11 @@
 scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 source $scriptpath/main
 
+if [[ -z $1 ]]; then
+    echo "Usage: my_swap_status <uuid (check my_recent_swaps)>"
+    exit 0
+fi
+
 uuid=${1}
 
 jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"my_swap_status","params":{"uuid":"'${uuid}'"},"userpass":"'${userpass}'"}')
