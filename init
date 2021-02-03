@@ -19,9 +19,6 @@ if [[ ! -f ${scriptpath}/config ]]; then
       echo
       if [[ $REPLY =~ ^[Yy]$ ]]; then
         generated_passphrase=$(rand)
-
-        # echo $(awk -v var="passphrase" -v new_val="${generated_passphrase}" 'BEGIN{FS=OFS="="}match($1, "^\\s*" var "\\s*") {$2="" new_val}1' ${scriptpath}/config) > ${scriptpath}/config
-
         sed -i "s/passphrase=\"\"/passphrase=${generated_passphrase}/g" ${scriptpath}/config
       fi
 
@@ -29,8 +26,6 @@ if [[ ! -f ${scriptpath}/config ]]; then
       echo
       if [[ $REPLY =~ ^[Yy]$ ]]; then
         generated_userpass=$(rand)
-
-        # echo $(awk -v var="userpass" -v new_val="${generated_userpass}" 'BEGIN{FS=OFS="="}match($1, "^\\s*" var "\\s*") {$2="" new_val}1' ${scriptpath}/config) > ${scriptpath}/config
         sed -i "s/userpass=/userpass=${generated_userpass}/g" ${scriptpath}/config
       fi
   fi
