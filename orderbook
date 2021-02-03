@@ -20,15 +20,42 @@ coin2=${2^^}
 
 orderbooks=$(curl -s --url "http://127.0.0.1:7783" --data "{\"userpass\":\"$userpass\",\"method\":\"orderbook\",\"base\":\"${coin1}\",\"rel\":\"${coin2}\"}")
 
-echo "--Bids (Selling ${coin2} for ${coin1})--"
-printf "%-7s %-34s %20s %20s %20s %20s\n" "Coin" "Address" "Price ${coin2}/${coin1}" "Volume ${coin1}" "Volume ${coin2}" "Price ${coin1}/${coin2}"
-printf "%-7s %-34s %20s %20s %20s %20s\n" "----" "-------" "-------------" "----------" "----------" "-------------"
-bids=$(jq -rc '.bids | sort_by((.price|tonumber)) | .[] | [.coin, .address, .price, ((.maxvolume|tonumber)/(.price|tonumber)), .maxvolume, (1/(.price|tonumber))] | @tsv' <<< $orderbooks)
-awk '{printf("%-6s %35s %20.8f %20.8f %20.8f %20.8f\n", $1, $2, $3, $4, $5, $6)}' <<< $bids
+if [[ ! -z $remote ]] && (( $remote > 0 )); then
+    priceinfo=$(curl -s --url "https://komodostats.com/api/price/pair.json?coin1=${coin1}&coin2=${coin2}")
+    coin1val=$(jq -r --arg coinkey ${coin1} '.[$coinkey].price_btc' <<< $priceinfo)
+    coin2val=$(jq -r --arg coinkey ${coin2} '.[$coinkey].price_btc' <<< $priceinfo)
+fi
 
-echo
-echo "--Asks (Buying ${coin2} with ${coin1})--"
-printf "%-7s %-34s %20s %20s %20s %20s\n" "Coin" "Address" "Price ${coin2}/${coin1}" "Volume ${coin1}" "Volume ${coin2}" "Price ${coin1}/${coin2}"
-printf "%-7s %-34s %20s %20s %20s %20s\n" "----" "-------" "-------------" "----------" "----------" "-------------"
-asks=$(jq -r '.asks | sort_by((.price|tonumber)) | .[] | [.coin, .address, .price, .maxvolume, ((.maxvolume|tonumber)*(.price|tonumber)), (1/(.price|tonumber))] | @tsv' <<< $orderbooks)
-awk '{printf("%-6s %35s %20.8f %20.8f %20.8f %20.8f\n", $1, $2, $3, $4, $5, $6)}' <<< $asks
+if [[ ! -z $coin1val ]] && [[ $coin1val != "null" ]] && [[ ! -z $coin2val ]] && [[ $coin2val != "null" ]]; then
+    echo "-- ${coin1}: ₿ ${coin1val}    ${coin2}: ₿ ${coin2val} --"
+    echo "--Bids (Selling ${coin2} for ${coin1})--"
+    printf "%-7s %-34s %20s %20s %20s %20s %20s %6s\n" "Coin" "Address" "Price ${coin2}/${coin1}" "Volume ${coin1}" "Volume ${coin2}" "Price ${coin1}/${coin2}" "Price BTC/${coin2}" "Diff %"
+    printf "%-7s %-34s %20s %20s %20s %20s %20s %4s\n" "----" "-------" "-------------" "----------" "----------" "-------------" "-------------" "------"
+    bids=$(jq -rc --arg coin1price ${coin1val} --arg coin2price ${coin2val} '.bids | sort_by((.price|tonumber)) | .[] | [.coin, .address, .price, ((.maxvolume|tonumber)/(.price|tonumber)), .maxvolume, (1/(.price|tonumber)), (1/(.price|tonumber)*($coin1price|tonumber)), (((1/(.price|tonumber)*($coin1price|tonumber))-($coin2price|tonumber))/($coin2price|tonumber))*100 ] | @tsv' <<< $orderbooks)
+    awk '{printf("%-6s %35s %20.8f %20.8f %20.8f %20.8f %20.8f %6.2f\n", $1, $2, $3, $4, $5, $6, $7, $8)}' <<< $bids
+
+    echo
+    echo "--Asks (Buying ${coin2} with ${coin1})--"
+    printf "%-7s %-34s %20s %20s %20s %20s %20s %6s\n" "Coin" "Address" "Price ${coin2}/${coin1}" "Volume ${coin1}" "Volume ${coin2}" "Price ${coin1}/${coin2}" "Price BTC/${coin2}" "Diff %"
+    printf "%-7s %-34s %20s %20s %20s %20s %20s %4s\n" "----" "-------" "-------------" "----------" "----------" "-------------" "-------------" "------"
+    asks=$(jq -r --arg coin1price ${coin1val} --arg coin2price ${coin2val} '.asks | sort_by((.price|tonumber)) | .[] | [.coin, .address, .price, .maxvolume, ((.maxvolume|tonumber)*(.price|tonumber)), (1/(.price|tonumber)), (1/(.price|tonumber)*($coin1price|tonumber)), (((1/(.price|tonumber)*($coin1price|tonumber))-($coin2price|tonumber))/($coin2price|tonumber))*100 ] | @tsv' <<< $orderbooks)
+    # asks=$(jq -r --arg coin1price ${coin1val} --arg coin2price ${coin2val} '.asks | sort_by((.price|tonumber)) | .[] | [.coin, .address, .price, .maxvolume, ((.maxvolume|tonumber)*(.price|tonumber)), (1/(.price|tonumber)), (1/(.price|tonumber)*($coin1price|tonumber)), (((1/(.price|tonumber)*($coin1price|tonumber))-$coin1price|tonumber)/$coin1price|tonumber) ] | @tsv' <<< $orderbooks)
+    awk '{printf("%-6s %35s %20.8f %20.8f %20.8f %20.8f %20.8f %6.2f\n", $1, $2, $3, $4, $5, $6, $7, $8)}' <<< $asks
+else
+    echo "--Bids (Selling ${coin2} for ${coin1})--"
+    printf "%-7s %-34s %20s %20s %20s %20s\n" "Coin" "Address" "Price ${coin2}/${coin1}" "Volume ${coin1}" "Volume ${coin2}" "Price ${coin1}/${coin2}"
+    printf "%-7s %-34s %20s %20s %20s %20s\n" "----" "-------" "-------------" "----------" "----------" "-------------"
+    bids=$(jq -rc '.bids | sort_by((.price|tonumber)) | .[] | [.coin, .address, .price, ((.maxvolume|tonumber)/(.price|tonumber)), .maxvolume, (1/(.price|tonumber))] | @tsv' <<< $orderbooks)
+    awk '{printf("%-6s %35s %20.8f %20.8f %20.8f %20.8f\n", $1, $2, $3, $4, $5, $6)}' <<< $bids
+
+    echo
+    echo "--Asks (Buying ${coin2} with ${coin1})--"
+    printf "%-7s %-34s %20s %20s %20s %20s\n" "Coin" "Address" "Price ${coin2}/${coin1}" "Volume ${coin1}" "Volume ${coin2}" "Price ${coin1}/${coin2}"
+    printf "%-7s %-34s %20s %20s %20s %20s\n" "----" "-------" "-------------" "----------" "----------" "-------------"
+    asks=$(jq -r '.asks | sort_by((.price|tonumber)) | .[] | [.coin, .address, .price, .maxvolume, ((.maxvolume|tonumber)*(.price|tonumber)), (1/(.price|tonumber))] | @tsv' <<< $orderbooks)
+    awk '{printf("%-6s %35s %20.8f %20.8f %20.8f %20.8f\n", $1, $2, $3, $4, $5, $6)}' <<< $asks
+fi
+
+
+
+
