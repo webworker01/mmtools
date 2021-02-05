@@ -17,7 +17,7 @@ coin1=${1^^}
 coin2=${2^^}
 
 if [[ "$4" == "max" ]]; then
-    jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"setprice","base":"'${coin1}'","rel":"'${coin2}'","price":"'${3}'","max":true,"userpass":"'${userpass}'"}')
+    jq '.result | del(.. | .max_volume_rat?,.min_base_vol_rat?,.price_rat?,.max_base_vol_rat?)' <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"setprice","base":"'${coin1}'","rel":"'${coin2}'","price":"'${3}'","max":true,"userpass":"'${userpass}'"}')
 else
-    jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"setprice","base":"'${coin1}'","rel":"'${coin2}'","price":"'${3}'","volume":"'${4}'","userpass":"'${userpass}'"}')
+    jq '.result | del(.. | .max_volume_rat?,.min_base_vol_rat?,.price_rat?,.max_base_vol_rat?)' <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"setprice","base":"'${coin1}'","rel":"'${coin2}'","price":"'${3}'","volume":"'${4}'","userpass":"'${userpass}'"}')
 fi
