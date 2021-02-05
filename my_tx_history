@@ -21,4 +21,4 @@ fi
 
 coin=${1^^}
 
-jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"my_tx_history","coin":"'${coin}'","limit":"'${limit}'","userpass":"'${userpass}'"}')
+jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"my_tx_history","coin":"'${coin}'","limit":'${limit}',"userpass":"'${userpass}'"}')

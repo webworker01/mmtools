@@ -8,6 +8,11 @@
 scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 source $scriptpath/main
 
+if [[ -z $1 ]]; then
+    echo "You must specify a coin"
+    exit 0
+fi
+
 coin=${1^^}
 
 jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"get_trade_fee","coin":"'${coin}'", "userpass":"'${userpass}'"}')

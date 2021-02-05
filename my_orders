@@ -8,5 +8,12 @@
 scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 source $scriptpath/main
 
-jq '. | del(.. | .max_volume_rat?,.min_base_vol_rat?,.price_rat?,.max_base_vol_rat?)' <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"my_orders","userpass":"'${userpass}'"}')
+my_orders=$(curl -s --url "http://127.0.0.1:7783" --data '{"method":"my_orders","userpass":"'${userpass}'"}')
+
+echo "-- Maker Orders --"
+jq -c '.result.maker_orders[] | del(.. | .max_volume_rat?,.min_base_vol_rat?,.price_rat?,.max_base_vol_rat?)' <<< ${my_orders}
+
+echo "-- Taker Orders --"
+jq -c '.result.taker_orders[] | del(.. | .max_volume_rat?,.min_base_vol_rat?,.price_rat?,.max_base_vol_rat?)' <<< ${my_orders}
+
 echo

@@ -9,3 +9,4 @@ scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 source $scriptpath/main
 
 curl -s --url "http://127.0.0.1:7783" --data '{"method":"help","userpass":"'${userpass}'"}'
+echo

@@ -8,6 +8,11 @@
 scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 source $scriptpath/main
 
+if [[ -z $1 ]]; then
+    echo "You must specify the UUID"
+    exit 0
+fi
+
 uuid=${1}
 
 recover_data=$(curl -s --url "http://127.0.0.1:7783" --data '{"method":"recover_funds_of_swap","params":{"uuid":"'${uuid}'"},"userpass":"'${userpass}'"}')
