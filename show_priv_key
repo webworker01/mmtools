@@ -1,0 +1,18 @@
+#!/bin/bash
+#
+# Show the private key for an specified coin
+#
+# @author lightspeed393
+# @link https://developers.atomicdex.io/basic-docs/atomicdex/atomicdex-api.html#show-priv-key
+#
+scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+source $scriptpath/main
+
+if [[ -z $1 ]]; then
+    echo "You must specify a coin"
+    exit 0
+fi
+
+coin=${1^^}
+
+jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"show_priv_key","coin":"'${coin}'","userpass":"'${userpass}'"}')

@@ -1,0 +1,23 @@
+#!/bin/bash
+#
+# unban all pubkeys or one specific pubkey
+#
+# @author lightspeed393
+# @link https://developers.atomicdex.io/basic-docs/atomicdex/atomicdex-api.html#unban-pubkeys
+#
+scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+source $scriptpath/main
+
+if [[ -z $1 ]] ; then
+    echo "Usage: ./unban_pubkeys <pubkey>"
+    echo "       ./unban_pubkeys all"
+    exit 0
+fi
+
+pubkey=${1^^}
+
+if [[ "$pubkey" == "all" ]]; then
+    jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"userpass":"'${userpass}'","method":"unban_pubkeys","unban_by":{"type":"ALL"}}')
+else
+    jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"userpass":"'${userpass}'","method":"unban_pubkeys","unban_by":{"type":"Few","data":["'$pubkey'"]}}')
+fi
