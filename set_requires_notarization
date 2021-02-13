@@ -1,0 +1,25 @@
+#!/bin/bash
+#
+# The set_requires_notarization method indicates whether MM2 must wait for a dPoW notarization of the given atomic swap transactions.
+#
+# @author lightspeed393
+# @link https://developers.atomicdex.io/basic-docs/atomicdex/atomicdex-api.html#set-requires-notarization
+#
+scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+source $scriptpath/main
+
+if [[ -z $1 ]] || [[ -z $2 ]]; then
+    echo "Usage: set_requires_notarization <coin> <true/false>"
+    exit 0
+fi
+
+coin=${1^^}
+
+if [[ $2 == "true" ]]; then
+    jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"set_requires_notarization","coin":"'${coin}'","requires_notarization":'true',"userpass":"'${userpass}'"}')
+elif [[ $2 == "false" ]]; then
+    jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"set_requires_notarization","coin":"'${coin}'","requires_notarization":'false',"userpass":"'${userpass}'"}')
+else
+    echo "Usage: set_requires_notarization <coin> <true/false>"
+    exit 0
+fi

@@ -1,0 +1,11 @@
+#!/bin/bash
+#
+# List public keys that are banned from interacting with this node.
+#
+# @author lightspeed393
+# @link https://developers.atomicdex.io/basic-docs/atomicdex/atomicdex-api.html#list-banned-pubkeys
+#
+scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+source $scriptpath/main
+
+jq . <<< $(curl --url "http://127.0.0.1:7783/" --data '{\"userpass\":\"$userpass\",\"method\":\"list_banned_pubkeys\"}')
