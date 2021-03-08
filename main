@@ -7,8 +7,8 @@
 scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 if [[ ! -f ${scriptpath}/config ]]; then
-  echo "config file does not exist, exiting"
-  exit
+    echo "config file does not exist, exiting"
+    exit
 fi
 
 #imports
