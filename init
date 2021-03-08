@@ -60,4 +60,6 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
   cd $scriptpath
   git clone https://github.com/cipig/mmtools cipimmtools
   ln -s ./cipimmtools/mpm mpm
+
+  sed -i "s/enablempm=0/enablempm=1/g" ${scriptpath}/config
 fi
