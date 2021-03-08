@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Enable a coin via electrum
+# Display help
 #
 # @author webworker01
 # @link https://developers.atomicdex.io/basic-docs/atomicdex/atomicdex-api.html#help

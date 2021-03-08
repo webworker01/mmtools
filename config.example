@@ -23,6 +23,12 @@ passphrase=""
 #RPC password
 userpass=
 
+#Set default mode for connecting to a blockchain (electrum|daemon)
+default_coin_mode="electrum"
+
+# Auto connect to these electrums on ./start (requires automation=1)
+auto_enable=('KMD' 'VRSC' 'WSB' 'SOULJA')
+
 #Required confirmations
 required_confirmations=2
 
@@ -32,8 +38,5 @@ automation=1
 # (1|0) Enable remote data from komodostats.com for price info etc
 remote=1
 
-# Auto connect to these electrums on ./start (requires automation=1)
-auto_electrum=('KMD' 'VRSC' 'WSB' 'SOULJA')
-
 # Enable cipi's mmtools/mpm integration
-enablempm=0
+mpm_enable=0

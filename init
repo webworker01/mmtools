@@ -8,58 +8,58 @@
 scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 if [[ ! -f ${scriptpath}/config ]]; then
-  read -p "No config file detected, do you want to set one up? (y/n)" -n 1 -r
-  echo
-  if [[ $REPLY =~ ^[Yy]$ ]]; then
-      cp ${scriptpath}/config.example ${scriptpath}/config
-      source $scriptpath/main
+    read -p "No config file detected, do you want to set one up? (y/n)" -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        cp ${scriptpath}/config.example ${scriptpath}/config
+        source $scriptpath/main
 
-      read -p "Generate random wallet passphrase? (y/n)" -n 1 -r
-      echo
-      if [[ $REPLY =~ ^[Yy]$ ]]; then
-        generated_passphrase=$(rand)
-        sed -i "s/passphrase=\"\"/passphrase=${generated_passphrase}/g" ${scriptpath}/config
-      fi
+        read -p "Generate random wallet passphrase? (y/n)" -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+          generated_passphrase=$(rand)
+          sed -i "s/passphrase=\"\"/passphrase=${generated_passphrase}/g" ${scriptpath}/config
+        fi
 
-      read -p "Generate random rpc userpass? (y/n)" -n 1 -r
-      echo
-      if [[ $REPLY =~ ^[Yy]$ ]]; then
-        generated_userpass=$(rand)
-        sed -i "s/userpass=/userpass=${generated_userpass}/g" ${scriptpath}/config
-      fi
-  fi
+        read -p "Generate random rpc userpass? (y/n)" -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+          generated_userpass=$(rand)
+          sed -i "s/userpass=/userpass=${generated_userpass}/g" ${scriptpath}/config
+        fi
+    fi
 else
-  source $scriptpath/main
+    source $scriptpath/main
 fi
 
 read -p "Install atomicDEX-API and dependencies? (y/n)" -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-  curl https://sh.rustup.rs -sSf | sh
+    curl https://sh.rustup.rs -sSf | sh
 
-  sudo apt-get install -y build-essential git llvm-3.9-dev libclang-3.9-dev clang-3.9 libssl-dev pkg-config jq bc gawk
+    sudo apt-get install -y build-essential git llvm-3.9-dev libclang-3.9-dev clang-3.9 libssl-dev pkg-config jq bc gawk
 
-  rustup install nightly-2020-10-25
-  rustup default nightly-2020-10-25
-  rustup component add rustfmt-preview
+    rustup install nightly-2020-10-25
+    rustup default nightly-2020-10-25
+    rustup component add rustfmt-preview
 
-  cd ~
-  git clone https://github.com/KomodoPlatform/atomicDEX-API
-  cd ~/atomicDEX-API
-  git checkout beta-2.1.3162
-  cargo build --features native -vv
+    cd ~
+    git clone https://github.com/KomodoPlatform/atomicDEX-API
+    cd ~/atomicDEX-API
+    git checkout beta-2.1.3162
+    cargo build --features native -vv
 
-  cd $scriptpath
-  git clone https://github.com/komodoplatform/coins.git
+    cd $scriptpath
+    git clone https://github.com/komodoplatform/coins.git
 fi
 
 read -p "Install cipi's mmtools/mpm and dependencies? (y/n)" -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-  sudo apt-get install jq libdatetime-perl libdatetime-format-strptime-perl libjson-perl libjson-rpc-perl libfile-slurp-perl liblwp-protocol-https-perl
-  cd $scriptpath
-  git clone https://github.com/cipig/mmtools cipimmtools
-  ln -s ./cipimmtools/mpm mpm
+    sudo apt-get install jq libdatetime-perl libdatetime-format-strptime-perl libjson-perl libjson-rpc-perl libfile-slurp-perl liblwp-protocol-https-perl
+    cd $scriptpath
+    git clone https://github.com/cipig/mmtools cipimmtools
+    ln -s ./cipimmtools/mpm mpm
 
-  sed -i "s/enablempm=0/enablempm=1/g" ${scriptpath}/config
+    sed -i "s/mpm_enable=0/mpm_enable=1/g" ${scriptpath}/config
 fi

@@ -28,16 +28,19 @@ cd ${mmpath}
 sleep 7
 
 if (( automation > 0 )); then
-    for enable_coin in ${auto_electrum[@]}; do
-        $scriptpath/electrum $enable_coin
+    for enable_coin in ${auto_enable[@]}; do
+        if [[ "${default_coin_mode}" == "electrum" ]]; then
+            $scriptpath/electrum $enable_coin
+        elif [[ "${default_coin_mode}" == "daemon" ]]; then
+            $scriptpath/enable $enable_coin
+        fi
     done
 
     $scriptpath/coins_needed_for_kick_start
 fi
 
-if (( enablempm > 0 )); then
+if (( mpm_enable > 0 )); then
     export userpass=${userpass}
-    cd ${scriptpath}
-    cd cipimmtools
+    cd ${scriptpath}/cipimmtools
     git pull
 fi
