@@ -11,8 +11,6 @@ cd ${scriptpath}/coins
 git pull
 cp ${scriptpath}/coins/coins "${mmpath}coins"
 
-export userpass=${userpass}
-
 cat <<EOF > ${mmpath}/MM2.json
 {
     "gui": "mmtools",
@@ -38,6 +36,7 @@ if (( automation > 0 )); then
 fi
 
 if (( enablempm > 0 )); then
+    export userpass=${userpass}
     cd ${scriptpath}
     cd cipimmtools
     git pull
