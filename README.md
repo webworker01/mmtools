@@ -9,11 +9,13 @@ The scripts in this repo are meant to be an educational and functional interacti
 * [AtomicDex MM2 Repository](https://github.com/KomodoPlatform/atomicDEX-API)
 * [AtomicDex Coins Repository](https://github.com/KomodoPlatform/coins)
 * [AtomicDex Desktop](https://github.com/KomodoPlatform/atomicDEX-Desktop) (if you don't want to use CLI)
-
+* [cipi's mmtools/mpm](https://github.com/cipig/mmtools) (additional cli tool for monitoring and updating order prices using various 3rd party apis)
 
 ![orderbook.png](./img/orderbook.png)
 
 ## Setup
+
+Developed & tested on Ubuntu 18.04
 
 ```
 cd ~

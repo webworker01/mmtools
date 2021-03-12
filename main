@@ -7,8 +7,8 @@
 scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 if [[ ! -f ${scriptpath}/config ]]; then
-  echo "config file does not exist, exiting"
-  exit
+    echo "config file does not exist, exiting"
+    exit
 fi
 
 #imports
@@ -20,4 +20,6 @@ netid=${netid:=7777}
 required_confirmations=${required_confirmations:=2}
 automation=${automation:=1}
 remote=${remote:=1}
-auto_electrum=${auto_electrum:=('KMD' 'VRSC' 'WSB' 'SOULJA')}
+default_coin_mode=${default_coin_mode:=('electrum')}
+auto_enable=${auto_enable:=('KMD')}
+mpm_enable=${mpm_enable:=0}
