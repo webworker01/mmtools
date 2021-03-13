@@ -35,7 +35,7 @@ fi
 read -p "Install atomicDEX-API and dependencies? (y/n)" -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    curl https://sh.rustup.rs -sSf | sh
+    curl https://sh.rustup.rs -sSf | sh -s -- -y
 
     source $HOME/.cargo/env
 
