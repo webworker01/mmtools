@@ -6,7 +6,11 @@
 # @link https://github.com/cipig/mmtools
 #
 scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-source $scriptpath/userpass
+source $scriptpath/main
+
+if (( mpm_enable > 0 )); then
+    export userpass=${userpass}
+fi
 
 while true; do
   date
