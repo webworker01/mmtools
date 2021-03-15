@@ -1,0 +1,7 @@
+#!/bin/bash
+#
+# Kills the MPM process.
+#
+# @author lightspeed393
+#
+ps -ef | grep /mmtools/mpm_run | grep -v grep | awk '{print $2}' | xargs kill

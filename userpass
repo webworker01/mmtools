@@ -1,0 +1,10 @@
+#!/bin/bash
+#
+# Exports the mm2 userpass.
+#
+# @author lightspeed393
+#
+scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+source $scriptpath/main
+
+export userpass="$userpass"

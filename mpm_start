@@ -16,15 +16,15 @@ if [[ -z $1 ]]; then
 fi
 
 if [[ $1 == "BTC" ]]; then
-    stdbuf -oL nohup ~/mmtools/mpm/mpm.sh.dex_gecko BTC bitcoin > /tmp/mpm.log.dex.$1 &
+    stdbuf -oL nohup ~/mmtools/mpm_run BTC bitcoin > /tmp/mpm.log.dex.$1 &
 elif [[ $1 == "KMD" ]]; then
-    stdbuf -oL nohup ~/mmtools/mpm/mpm.sh.dex_gecko KMD komodo > /tmp/mpm.log.dex.$1 &
+    stdbuf -oL nohup ~/mmtools/mpm_run KMD komodo > /tmp/mpm.log.dex.$1 &
 elif [[ $1 == "BCH" ]]; then
-    stdbuf -oL nohup ~/mmtools/mpm/mpm.sh.dex_gecko BCH bitcoin-cash > /tmp/mpm.log.dex.$1 &
+    stdbuf -oL nohup ~/mmtools/mpm_run BCH bitcoin-cash > /tmp/mpm.log.dex.$1 &
 elif [[ $1 == "LTC" ]]; then
-    stdbuf -oL nohup ~/mmtools/mpm/mpm.sh.dex_gecko LTC litecoin > /tmp/mpm.log.dex.$1 &
+    stdbuf -oL nohup ~/mmtools/mpm_run LTC litecoin > /tmp/mpm.log.dex.$1 &
 elif [[ $1 == "DOGE" ]]; then
-    stdbuf -oL nohup ~/mmtools/mpm/mpm.sh.dex_gecko DOGE dogecoin > /tmp/mpm.log.dex.$1 &
+    stdbuf -oL nohup ~/mmtools/mpm_run DOGE dogecoin > /tmp/mpm.log.dex.$1 &
 else
     echo "Choose from BTC, KMD, BCH, LTC or DOGE."
 fi
