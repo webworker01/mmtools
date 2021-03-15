@@ -1,0 +1,15 @@
+#!/bin/bash
+#
+# Runs mpm.
+#
+# @author lightspeed393
+# @link https://github.com/cipig/mmtools
+#
+scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+source $scriptpath/userpass
+
+while true; do
+  date
+  ~/mmtools/mpm/mpm dex_gecko $1 $2
+  sleep 120
+done
