@@ -39,7 +39,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
 
     source $HOME/.cargo/env
 
-    sudo apt-get install -y build-essential git llvm-3.9-dev libclang-3.9-dev clang-3.9 libssl-dev pkg-config jq bc gawk
+    sudo apt-get install -y build-essential git llvm-3.9-dev libclang-3.9-dev clang-3.9 libssl-dev pkg-config jq bc gawk nano
 
     rustup install nightly-2020-10-25
     rustup default nightly-2020-10-25
