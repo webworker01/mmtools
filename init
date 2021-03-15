@@ -35,9 +35,11 @@ fi
 read -p "Install atomicDEX-API and dependencies? (y/n)" -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    curl https://sh.rustup.rs -sSf | sh
+    curl https://sh.rustup.rs -sSf | sh -s -- -y
 
-    sudo apt-get install -y build-essential git llvm-3.9-dev libclang-3.9-dev clang-3.9 libssl-dev pkg-config jq bc gawk
+    source $HOME/.cargo/env
+
+    sudo apt-get install -y build-essential git llvm-3.9-dev libclang-3.9-dev clang-3.9 libssl-dev pkg-config jq bc gawk nano
 
     rustup install nightly-2020-10-25
     rustup default nightly-2020-10-25
@@ -56,7 +58,7 @@ fi
 read -p "Install cipi's mmtools/mpm and dependencies? (y/n)" -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    sudo apt-get install jq libdatetime-perl libdatetime-format-strptime-perl libjson-perl libjson-rpc-perl libfile-slurp-perl liblwp-protocol-https-perl
+    sudo apt-get install -y jq libdatetime-perl libdatetime-format-strptime-perl libjson-perl libjson-rpc-perl libfile-slurp-perl liblwp-protocol-https-perl
     cd $scriptpath
     git clone https://github.com/cipig/mmtools cipimmtools
     ln -s ./cipimmtools/mpm mpm
