@@ -48,7 +48,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
     cd ~
     git clone https://github.com/KomodoPlatform/atomicDEX-API
     cd ~/atomicDEX-API
-    git checkout beta-2.1.3162
+    git checkout beta-2.1.3731
     cargo build --features native -vv
 
     cd $scriptpath
