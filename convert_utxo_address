@@ -1,0 +1,19 @@
+#!/bin/bash
+#
+# Convert an address to the equivalent address on another coin's network
+#
+# @author webworker01
+# @link https://developers.atomicdex.io/basic-docs/atomicdex-api-legacy/convert_utxo_address.html
+#
+scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+source $scriptpath/main
+
+if [[ -z $1 ]] || [[ -z $2 ]]; then
+    echo "Usage: ./convert_utxo_address <origcoin> <address> <tocoin>"
+    exit 0
+fi
+
+origcoin=${1^^}
+tocoin=${3^^}
+
+jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"convert_utxo_address","coin":"'${origcoin}'","address":"'${2}'","to_coin":"'${tocoin}'","userpass":"'${userpass}'"}')

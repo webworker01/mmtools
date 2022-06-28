@@ -6,13 +6,13 @@
 # @todo add error checking for addresses and amounts
 #
 # @author webworker01
-# @link https://developers.atomicdex.io/basic-docs/atomicdex/atomicdex-api.html#withdraw
+# @link https://developers.atomicdex.io/basic-docs/atomicdex-api-legacy/withdraw.html
 #
 scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 source $scriptpath/main
 
 if [[ -z $1 ]] || [[ -z $2 ]] || [[ -z $3 ]]; then
-    echo "Usage: ./withdraw <coin> <address> <amount>"
+    echo "Usage: ./withdraw <coin> <address> <amount or max>"
     exit 0
 fi
 

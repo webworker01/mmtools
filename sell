@@ -6,7 +6,7 @@
 # (Tries to sell 10000 KMD at a price of 0.0001 BTC/KMD)
 #
 # @author webworker01
-# @link https://developers.atomicdex.io/basic-docs/atomicdex/atomicdex-api.html#sell
+# @link https://developers.atomicdex.io/basic-docs/atomicdex-api-legacy/sell.html
 #
 scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 source $scriptpath/main

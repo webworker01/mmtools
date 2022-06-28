@@ -5,7 +5,7 @@
 # Usage: ./orderbook btc kmd
 #
 # @author webworker01
-# @link https://developers.atomicdex.io/basic-docs/atomicdex/atomicdex-api.html#orderbook
+# @link https://developers.atomicdex.io/basic-docs/atomicdex-api-legacy/orderbook.html
 #
 scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 source $scriptpath/main
@@ -24,8 +24,6 @@ if [[ ! -z $remote ]] && (( $remote > 0 )); then
     priceinfo=$(curl -s --url "https://komodostats.com/api/price/pair.json?coin1=${coin1}&coin2=${coin2}")
     coin1val=$(jq -r --arg coinkey ${coin1} '.[$coinkey].price_btc' <<< $priceinfo)
     coin2val=$(jq -r --arg coinkey ${coin2} '.[$coinkey].price_btc' <<< $priceinfo)
-
-    echo $coin2val
 fi
 
 if [[ ! -z $coin1val ]] && [[ $coin1val != "null" && $coin1val != "0.00000000" ]] && [[ ! -z $coin2val ]] && [[ $coin2val != "null" && $coin2val != "0.00000000" ]]; then

@@ -3,7 +3,7 @@
 # List currently enabled coins
 #
 # @author webworker01
-# @link https://developers.atomicdex.io/basic-docs/atomicdex/atomicdex-api.html#get-enabled-coins
+# @link https://developers.atomicdex.io/basic-docs/atomicdex-api-legacy/get_enabled_coins.html
 #
 scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 source $scriptpath/main

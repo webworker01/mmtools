@@ -1,0 +1,18 @@
+#!/bin/bash
+#
+# Show the min required volume to make a trade with a coin
+#
+# @author webworker01
+# @link https://developers.atomicdex.io/basic-docs/atomicdex-api-legacy/min_trading_vol.html
+#
+scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+source $scriptpath/main
+
+if [[ -z $1 ]]; then
+    echo "You must specify a coin"
+    exit 0
+fi
+
+coin=${1^^}
+
+jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"min_trading_vol","coin":"'${coin}'", "userpass":"'${userpass}'"}')

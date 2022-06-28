@@ -4,7 +4,7 @@
 # With automation=1 it will also attempt to set required confirmations
 #
 # @author webworker01
-# @link https://developers.atomicdex.io/basic-docs/atomicdex/atomicdex-api.html#electrum
+# @link https://developers.atomicdex.io/basic-docs/atomicdex-api-legacy/electrum.html
 #
 scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 source $scriptpath/main

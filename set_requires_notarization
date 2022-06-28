@@ -3,7 +3,7 @@
 # The set_requires_notarization method indicates whether MM2 must wait for a dPoW notarization of the given atomic swap transactions.
 #
 # @author lightspeed393
-# @link https://developers.atomicdex.io/basic-docs/atomicdex/atomicdex-api.html#set-requires-notarization
+# @link https://developers.atomicdex.io/basic-docs/atomicdex-api-legacy/set_requires_notarization.html
 #
 scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 source $scriptpath/main

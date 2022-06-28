@@ -3,7 +3,7 @@
 # Show last 10 swaps
 #
 # @author webworker01
-# @link https://developers.atomicdex.io/basic-docs/atomicdex/atomicdex-api.html#my-recent-swaps
+# @link https://developers.atomicdex.io/basic-docs/atomicdex-api-legacy/my_recent_swaps.html
 #
 scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 source $scriptpath/main

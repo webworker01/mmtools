@@ -1,0 +1,11 @@
+#!/bin/bash
+#
+# Get info on currently connect peers
+#
+# @author webworker01
+# @link https://developers.atomicdex.io/basic-docs/atomicdex-api-legacy/get_peers_info.html
+#
+scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+source $scriptpath/main
+
+jq -c .result[] <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"get_peers_info","userpass":"'${userpass}'"}')

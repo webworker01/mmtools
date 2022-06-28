@@ -3,7 +3,7 @@
 # Get recent tx for a coin (default 10)
 #
 # @author webworker01
-# @link https://developers.atomicdex.io/basic-docs/atomicdex/atomicdex-api.html#my-tx-history
+# @link https://developers.atomicdex.io/basic-docs/atomicdex-api-legacy/my_tx_history.html
 #
 scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 source $scriptpath/main

@@ -3,7 +3,7 @@
 # Get mm2 version information
 #
 # @author webworker01
-# @link https://developers.atomicdex.io/basic-docs/atomicdex/atomicdex-api.html#version
+# @link https://developers.atomicdex.io/basic-docs/atomicdex-api-legacy/version.html
 #
 scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 source $scriptpath/main

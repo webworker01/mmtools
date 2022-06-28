@@ -1,0 +1,11 @@
+#!/bin/bash
+#
+# Show info on accrued kmd rewards per utxo
+#
+# @author webworker01
+# @link https://developers.atomicdex.io/basic-docs/atomicdex-api-legacy/kmd_rewards_info.html
+#
+scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+source $scriptpath/main
+
+jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"kmd_rewards_info","userpass":"'${userpass}'"}')

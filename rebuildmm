@@ -10,10 +10,10 @@ cd ~/atomicDEX-API
 
 # git pull
 git fetch --all --tags
-git checkout beta-2.1.3731
+git checkout beta-2.1.5724
 
-rustup install nightly-2020-10-25
-rustup default nightly-2020-10-25
+rustup install nightly-2021-05-17
+rustup default nightly-2021-05-17
 rustup component add rustfmt-preview
 
 cargo build --features native -vv

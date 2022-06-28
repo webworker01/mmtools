@@ -1,0 +1,20 @@
+#!/bin/bash
+#
+# Best price orders for a specified volume
+#
+# @author webworker01
+# @link https://developers.atomicdex.io/basic-docs/atomicdex-api-legacy/best_orders.html
+#
+scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+source $scriptpath/main
+actions=("buy sell")
+if [[ -z $1 ]] || [[ -z $2 ]] || [[ ! " ${actions[*]} " =~ " ${2,,} " ]] || [[ -z $3 ]]; then
+    echo "Usage: ./best_orders <coin> <action (buy|sell)> <volume>"
+    exit 0
+fi
+
+coin=${1^^}
+action=${2,,}
+volume=${3}
+
+jq -c .result[] <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"best_orders","coin":"'${coin}'","action":"'${action}'","volume":"'${volume}'","userpass":"'${userpass}'"}')

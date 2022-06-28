@@ -3,7 +3,7 @@
 # Set required number of confirmations during trade steps
 #
 # @author webworker01
-# @link https://developers.atomicdex.io/basic-docs/atomicdex/atomicdex-api.html#set-required-confirmations
+# @link https://developers.atomicdex.io/basic-docs/atomicdex-api-legacy/set_required_confirmations.html
 #
 scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 source $scriptpath/main

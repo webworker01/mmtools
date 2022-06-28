@@ -1,0 +1,13 @@
+#!/bin/bash
+#
+# Show all active swaps on this node
+#
+# @author webworker01
+# @link https://developers.atomicdex.io/basic-docs/atomicdex-api-legacy/active_swaps.html
+#
+scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+source $scriptpath/main
+
+include_status=true
+
+jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"active_swaps","include_status":'${include_status}',"userpass":"'${userpass}'"}')

@@ -13,9 +13,8 @@ fi
 
 #imports
 source ${scriptpath}/config
-source ${scriptpath}/functions
 
-#defaults
+#config defaults if not set
 netid=${netid:=7777}
 required_confirmations=${required_confirmations:=2}
 automation=${automation:=1}
@@ -23,3 +22,10 @@ remote=${remote:=1}
 default_coin_mode=${default_coin_mode:=('electrum')}
 auto_enable=${auto_enable:=('KMD')}
 mpm_enable=${mpm_enable:=0}
+#Date format for logging
+datetime=${datetime:=$(date '+%Y-%m-%d %H:%M:%S')}
+
+#more imports
+source ${scriptpath}/functions
+
+api_url="http://127.0.0.1:7783"

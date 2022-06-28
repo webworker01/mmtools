@@ -3,7 +3,7 @@
 # Get status of an active order by UUID
 #
 # @author webworker01
-# @link https://developers.atomicdex.io/basic-docs/atomicdex/atomicdex-api.html#order-status
+# @link https://developers.atomicdex.io/basic-docs/atomicdex-api-legacy/order_status.html
 #
 scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 source $scriptpath/main

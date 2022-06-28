@@ -3,7 +3,7 @@
 # Cancel all active orders
 #
 # @author webworker01
-# @link https://developers.atomicdex.io/basic-docs/atomicdex/atomicdex-api.html#cancel-all-orders
+# @link https://developers.atomicdex.io/basic-docs/atomicdex-api-legacy/cancel_all_orders.html
 #
 scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 source $scriptpath/main

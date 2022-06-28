@@ -6,7 +6,7 @@
 # (Tries to buy 1 KMD at a price of 10000 KMD/BTC)
 #
 # @author webworker01
-# @see https://developers.atomicdex.io/basic-docs/atomicdex/atomicdex-api.html#buy
+# @see https://developers.atomicdex.io/basic-docs/atomicdex-api-legacy/buy.html
 #
 scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 source $scriptpath/main

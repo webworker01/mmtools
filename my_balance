@@ -3,7 +3,7 @@
 # Get balance for an enabled coin
 #
 # @author webworker01
-# @link https://developers.atomicdex.io/basic-docs/atomicdex/atomicdex-api.html#my-balance
+# @link https://developers.atomicdex.io/basic-docs/atomicdex-api-legacy/my_balance.html
 #
 scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 source $scriptpath/main

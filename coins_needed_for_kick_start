@@ -3,7 +3,7 @@
 # Check for and enable coins needed for mm to attempt to kick start existing trades.
 #
 # @author webworker01
-# @link https://developers.atomicdex.io/basic-docs/atomicdex/atomicdex-api.html#coins-needed-for-kick-start
+# @link https://developers.atomicdex.io/basic-docs/atomicdex-api-legacy/coins_needed_for_kick_start.html
 #
 scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 source $scriptpath/main

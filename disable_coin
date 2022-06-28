@@ -3,7 +3,7 @@
 # Deactivate a coin
 #
 # @author webworker01
-# @link https://developers.atomicdex.io/basic-docs/atomicdex/atomicdex-api.html#disable-coin
+# @link https://developers.atomicdex.io/basic-docs/atomicdex-api-legacy/disable_coin.html
 #
 scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 source $scriptpath/main

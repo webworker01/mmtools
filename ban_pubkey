@@ -1,0 +1,18 @@
+#!/bin/bash
+#
+# Bans a pubkey
+#
+# @author webworker01
+# @link https://developers.atomicdex.io/basic-docs/atomicdex-api-legacy/ban_pubkey.html
+#
+scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+source $scriptpath/main
+
+if [[ -z $1 ]] || [[ -z $2 ]]; then
+    echo "Usage: ./ban_pubkey <pubkey> <reason>"
+    exit 0
+fi
+
+reason="${@:2}"
+
+jq . <<< $(curl -s --url "http://127.0.0.1:7783" --data '{"method":"ban_pubkey","pubkey":"'${1}'","reason":"'${@:2}'","userpass":"'${userpass}'"}')
