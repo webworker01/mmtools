@@ -6,14 +6,14 @@
 # @link https://github.com/cipig/mmtools
 #
 if [[ -z $1 ]]; then
-    echo "You must specify a base coin to configure. (BTC, KMD, BCH, LTC, or DOGE)"
+    echo "You must specify a base coin to configure. (BTC-segwit, KMD, BCH, LTC-segwit, or DOGE)"
     echo ""
     echo "./mpm_config KMD"
     exit 0
 fi
 
-if [[ $1 == "BTC" ]] || [[ $1 == "KMD" ]] || [[ $1 == "BCH" ]] || [[ $1 == "LTC" ]] || [[ $1 == "DOGE" ]]; then
+if [[ $1 == "BTC-segwit" ]] || [[ $1 == "KMD" ]] || [[ $1 == "BCH" ]] || [[ $1 == "LTC-segwit" ]] || [[ $1 == "DOGE" ]]; then
     nano mpm/mpm.conf.dex.$1
 else
-    echo "Choose from BTC, KMD, BCH, LTC or DOGE."
+    echo "Choose from BTC-segwit, KMD, BCH, LTC-segwit or DOGE."
 fi

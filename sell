@@ -2,8 +2,8 @@
 #
 # Automatically sets a taker order with miner and dex fees calculated
 #
-# Usage: ./sell kmd btc 0.0001 10000
-# (Tries to sell 10000 KMD at a price of 0.0001 BTC/KMD)
+# Usage: ./sell kmd BTC-segwit 0.0001 10000
+# (Tries to sell 10000 KMD at a price of 0.0001 BTC-segwit/KMD)
 #
 # @author webworker01
 # @link https://developers.atomicdex.io/basic-docs/atomicdex-api-legacy/sell.html

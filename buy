@@ -2,8 +2,8 @@
 #
 # Automatically sets a buy order with miner and dex fees calculated
 #
-# Usage: ./buy kmd btc 10000 1
-# (Tries to buy 1 KMD at a price of 10000 KMD/BTC)
+# Usage: ./buy kmd BTC-segwit 10000 1
+# (Tries to buy 1 KMD at a price of 10000 KMD/BTC-segwit)
 #
 # @author webworker01
 # @see https://developers.atomicdex.io/basic-docs/atomicdex-api-legacy/buy.html
