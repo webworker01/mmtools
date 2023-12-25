@@ -9,22 +9,22 @@ scriptpath="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 source $scriptpath/main
 
 if [[ -z $1 ]]; then
-    echo "You must specify a base coin. (BTC, KMD, BCH, LTC, or DOGE)"
+    echo "You must specify a base coin. (BTC-segwit, KMD, BCH, LTC-segwit, or DOGE)"
     echo ""
     echo "./mpm_start KMD"
     exit 0
 fi
 
-if [[ $1 == "BTC" ]]; then
-    stdbuf -oL nohup ~/mmtools/mpm_run BTC bitcoin > $mmtoolslogfile &
+if [[ $1 == "BTC-segwit" ]]; then
+    stdbuf -oL nohup ~/mmtools/mpm_run BTC-segwit bitcoin > $mmtoolslogfile &
 elif [[ $1 == "KMD" ]]; then
     stdbuf -oL nohup ~/mmtools/mpm_run KMD komodo > $mmtoolslogfile &
 elif [[ $1 == "BCH" ]]; then
     stdbuf -oL nohup ~/mmtools/mpm_run BCH bitcoin-cash > $mmtoolslogfile &
-elif [[ $1 == "LTC" ]]; then
-    stdbuf -oL nohup ~/mmtools/mpm_run LTC litecoin > $mmtoolslogfile &
+elif [[ $1 == "LTC-segwit" ]]; then
+    stdbuf -oL nohup ~/mmtools/mpm_run LTC-segwit litecoin > $mmtoolslogfile &
 elif [[ $1 == "DOGE" ]]; then
     stdbuf -oL nohup ~/mmtools/mpm_run DOGE dogecoin > $mmtoolslogfile &
 else
-    echo "Choose from BTC, KMD, BCH, LTC or DOGE."
+    echo "Choose from BTC-segwit, KMD, BCH, LTC-segwit or DOGE."
 fi
